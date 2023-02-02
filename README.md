@@ -42,24 +42,30 @@ I'll be using HTML, CSS, JS, Webpack, npm, and Canvas' API to render the board.
 
 ## Saturday
 
-Code out a game start screen and layout
+
+- [ ] Code out a game start screen and layout
 
 ## Sunday
 
-Write out the story text and setup the story screens between battles. Also write the death text when a player loses along the way up the mountain, and has to restart the game
+
+- [ ] Write out the story text and setup the story screens between battles. Also write the death text when a player loses along the way up the mountain, and has to restart the game
 
 ## Monday
 
-Allow user to pick the next level from a mountain screen
+
+- [ ] Allow user to pick the next level from a mountain screen
 
 ## Tuesday
 
-Figure out how to add music to each scene.
+
+- [ ] Figure out how to add music to each scene.
 
 ## Wednesday
 
-Make animations and between-level smooth transitions
+
+- [ ] Make animations and between-level smooth transitions
 
 ## Thursday
 
-Polish the game
+
+- [ ] Polish the game and fix any bugs still left
