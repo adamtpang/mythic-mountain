@@ -26,7 +26,7 @@ I'll be using HTML, CSS, JS, Webpack, npm, and Canvas' API to render the board.
 - [ ] More levels
 - [ ] Overworld traversal
 
-**Implementation Timeline**
+## **Implementation Timeline**
 
 ## Thursday
 
