@@ -1,0 +1,46 @@
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(1, 4, 11);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.game-container {
+  position: relative;
+  width: 1434px;
+  height: 1000px;
+  margin: 0 auto;
+  cursor: url("../assets/overworld/cursor1.png"), auto;
+}
+
+.game-canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.game-container img {
+  position: absolute;
+  left: 42%;
+  top: 80%;
+  background-clip: padding-box;
+  border-radius: 15px;
+}
+
+#mute-button {
+  border: none;
+  background-color: transparent;
+}
+
+#mute-button img {
+  width: 40px;
+  height: 40px;
+}

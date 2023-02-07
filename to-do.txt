@@ -1,0 +1,72 @@
+simplify simplify simplify
+
+garden garden garden
+
+if you know go, if you dont grow
+
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+dry up the mute button code
+    make it so the mute button is initialized in the overworld script
+    make it so that different audio plays with each new screen
+Battle Scene
+play new music with the new screen
+
+make the button switch canvas to the battle scene, from the start screen
+
+    start
+
+    player turn
+    <CYCLE BETWEEN>
+    enemy turn
+
+    BOOLEAN
+    won
+    lost
+
+Start screen
+    get the start button to move to story intermission ||= Battle Scene
+
+Story intermission
+
+
+make the start button turn on the music
+    make it so that the audio.play() is linked to the look of the mute button
+match the button art and fonts with the game art and music and character assets
+make a start button appear over the canvas
+    make it console.log(clicked)
+watch the tutorial series from that one guy
+
+make a figma asset of the battle screen
+
+find assets for the combat scenes
+    landscapes
+fantasy mountain
+
+use ashipwright art as the basis of my storytelling and map design
+
+remember to credit authors of art and music
+    the 8-bit audio
+    art
+
+use the colors of the icons as pokemon typing. red, blue, green, normal. tic tac toe
+with red, green, blue, normal attacks
+
+put pauses between the start buttons and continue buttons
+    so that the music has time to fade in and out, and the screen can fade to black
+        make this an overworld function
+
+aim for a short, smooth experience
+    my speedrun x 3 is the cushion speed. aim for 10-15 minutes of gameplay
+quantize readme, exported from milanote
+figure out the story after i get the battle done
+change the background color eventually
+make the battle scene have the battle music
+make sure to fade in and out visually and sonicly. play different music for each part of the game
+    follow what music is available to me as a sonic guide
+make the mute button flash red until the first time the player hits it
+get some sound effects with each combat move
+make sure theres like 10 minutes of content
+get the start button to delete the start screen canvas and make a new one
+story is: a dragon threatens those who drink from its 
+make it so once someone clicks the screen, turn on the music, toggle on
+add button and transition sound effects

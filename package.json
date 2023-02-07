@@ -1,0 +1,37 @@
+{
+  "name": "mythic-mountain",
+  "version": "1.0.0",
+  "description": "Tiny medieval-themed, turned-based combat browser RPG",
+  "main": "index.js",
+
+  "browserslist": ["defaults"],
+  "scripts": {
+    "start": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bubbapang/mythic-mountain.git"
+  },
+  "keywords": [],
+  "author": "Adam Pangelinan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bubbapang/mythic-mountain/issues"
+  },
+  "homepage": "https://github.com/bubbapang/mythic-mountain#readme",
+  "dependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
+    "core-js": "^3.27.2",
+    "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.2",
+    "regenerator-runtime": "^0.13.11",
+    "sass": "^1.58.0",
+    "sass-loader": "^13.2.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
