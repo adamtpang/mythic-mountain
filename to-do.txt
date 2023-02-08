@@ -63,3 +63,4 @@ have people play my game along the way to playtest
 make it so that the start button also starts the music
 make changing screens change the background colors of the website
 make it so that the first click will start playing the music, or decide to autoplay the music
+change the readme to be updated
