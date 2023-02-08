@@ -1,17 +1,6 @@
-simplify simplify simplify
-
-garden garden garden
-
-if you know go, if you dont grow
-
-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-dry up the mute button code
-    make it so the mute button is initialized in the overworld script
-    make it so that different audio plays with each new screen
+find the right HUD images
 Battle Scene
-play new music with the new screen
-
-make the button switch canvas to the battle scene, from the start screen
+    formulate ui with these art images
 
     start
 
@@ -70,3 +59,7 @@ get the start button to delete the start screen canvas and make a new one
 story is: a dragon threatens those who drink from its 
 make it so once someone clicks the screen, turn on the music, toggle on
 add button and transition sound effects
+have people play my game along the way to playtest
+make it so that the start button also starts the music
+make changing screens change the background colors of the website
+make it so that the first click will start playing the music, or decide to autoplay the music

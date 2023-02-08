@@ -1,9 +1,12 @@
+import BattleScreen from "./battle-screen.js"
+
 export default class StartScreen {
-    constructor(gameContainer, canvas, context, audio) {
-        this.gameContainer = gameContainer
-        this.canvas = canvas
-        this.context = context
-        this.audio = audio
+    constructor(overworld) {
+        this.overworld = overworld
+        this.gameContainer = overworld.element
+        this.canvas = overworld.canvas
+        this.context = overworld.context
+        this.audio = overworld.audio
 
         // create start screen art and start button
         this.startScreenArt = new Image()
@@ -22,7 +25,8 @@ export default class StartScreen {
         }
 
         this.startButton.addEventListener("click", () => {
-            console.log("start button clicked")
+            this.gameContainer.removeChild(this.startButton)
+            this.overworld.changeScreen(BattleScreen)
         })
     }
 }
