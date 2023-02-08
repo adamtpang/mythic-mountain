@@ -16,9 +16,13 @@ export default class StartScreen {
 
         // change audio
         this.audio.src = "../music/xDeviruchi - Title Theme .wav"
+
+        // find menu
+        this.menu = document.querySelector(".menu")
     }
 
     init() {
+        this.menu.style.display = "none"
         this.startScreenArt.onload = () => {
             this.context.drawImage(this.startScreenArt, 0, 0, this.canvas.width, this.canvas.height)
             this.gameContainer.appendChild(this.startButton)

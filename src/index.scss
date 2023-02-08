@@ -1,27 +1,30 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
-    background: rgb(1,4,11,255);
-    padding: 0;
-    margin: 0;
+    background: rgb(1,4,11,255); // setting the background color to the same as the start screen art
     overflow: hidden;
 }
 
 .game-container {
     position: relative;
-    width: 1434px;
-    height: 1000px;
+    width: 1147px;
+    height: 800px;
     margin: 0 auto;
+    top: 50;
     cursor: url('../assets/overworld/cursor1.png'), auto;
 }
 
-.game-canvas {
+.game-container .game-canvas {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    // left: 50%;
+    // top: 50%;
+    // transform: translate(-50%, -50%);
+}
+
+.player-canvas {
+    position: relative;
+}
+
+.enemy-canvas {
+    position: relative;
 }
 
 .game-container img {
@@ -42,14 +45,52 @@ body {
     height: 40px;
 }
 
-.player-canvas {
-    position: absolute;
-    bottom: 40px;
-    left: 10px;
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    width: 1147px;
+    height: 120px;
+    margin: 0 auto;
+    cursor: url('../assets/overworld/cursor1.png'), auto;
 }
 
-.enemy-canvas {
-    position: absolute;
-    bottom: 40px;
-    right: 10px;
+.mini-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    width: 287;
+    height: 120px;
+    margin: 0 auto;
+}
+
+#fight-button {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 35px;
+    width: 144px;
+    background-image: url("../assets/menu/fight square.png");
+    border: 2px solid gold;
+}
+
+#switch-button {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 35px;
+    width: 144px;
+    background-image: url("../assets/menu/switch square.png");
+    border: 2px solid gold;
+}
+
+.fight-choice {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 50%;
+    font-size: 20px;
+    display: none;
+}
+
+.fight-choice button {
+    border: none;
+    width: 144px;
+    height: 60px;
 }

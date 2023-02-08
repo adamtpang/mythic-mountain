@@ -1,6 +1,8 @@
-find the right HUD images
+follow and send the scorecard
+make sure instructions are finished
+do the WIDTHpx string parsing
+then get them to decrement based on the starting hp of the units
 Battle Scene
-    formulate ui with these art images
 
     start
 
@@ -64,3 +66,15 @@ make it so that the start button also starts the music
 make changing screens change the background colors of the website
 make it so that the first click will start playing the music, or decide to autoplay the music
 change the readme to be updated
+deploy to github pages
+make a resolved with slicing a spritesheet
+play the music and toggle the mute button when they click the game container
+make the mountain fight scene against the dragon, so it makes sense
+make the mute button more obvious, bigger?
+try using the gifs instead of animating each frame
+link the mute button to 'm' key press
+the enemies need moves too
+go back to the drawing board of milanote, and get to the bottom of my todolist ideas in vscode
+put a back HP image so the red line isnt left floating
+autoplay the music, then the mute button is always there
+Make a volume scale for mythic mountain

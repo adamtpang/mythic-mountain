@@ -15,7 +15,10 @@ export default class Overworld {
         this.audio = new Audio()
         this.audio.loop = true
         this.audio.muted = true
-        this.audio.volume = 0.3
+        this.audio.volume = 0.2
+
+        // find menu
+        this.menu = document.querySelector(".menu")
     }
 
     init() {
@@ -29,7 +32,7 @@ export default class Overworld {
                 button.innerHTML="<img src='assets/overworld/unmute_icon.png' alt='unmuted'></img>"
             }
         })
-        this.currentScreen = new BattleScreen(this)
+        this.currentScreen = new StartScreen(this)
         this.currentScreen.init()
     }
 
