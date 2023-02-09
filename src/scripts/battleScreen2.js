@@ -1,19 +1,27 @@
-import Battle from "./battle.js"
+import Battle2 from "./battle2.js"
 
-export default class BattleScreen {
+export default class BattleScreen2 {
     constructor(overworld) {
-        this.overworld = overworld
+        console.log(this)
         this.gameContainer = overworld.element
         this.canvas = overworld.canvas
         this.context = overworld.context
         this.audio = overworld.audio
 
+        // // clear game container of all children
+        // while (this.gameContainer.firstChild) {
+        //     this.gameContainer.removeChild(this.gameContainer.firstChild)
+        // }
+
+        // // clear canvas
+        // this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
         // create battle screen art
         this.battleScreenArt = new Image()
-        this.battleScreenArt.src = "../assets/battle-screen-art/twilight-pond.png";
+        this.battleScreenArt.src = "assets/cave-art/gray-cave.png";
 
         // change audio
-        this.audio.src = "../music/xDeviruchi - And The Journey Begins .wav"
+        this.audio.src = "../music/xDeviruchi - Decisive Battle.wav"
 
         // create sprite canvases
         this.playerCanvas = document.createElement("canvas")
@@ -53,9 +61,9 @@ export default class BattleScreen {
         this.fireknight8.src = "../assets/battle-screen-art/fireknight/idle_8.png"
         this.playerFrame = 0
 
-        // create slime
-        this.slime = new Image()
-        this.slime.src = "../assets/battle-screen-art/slime/slime_idle.png"
+        // create dragon
+        this.dragon = new Image()
+        this.dragon.src = "../assets/battle-screen2-art/dragon/dragon_idle 1.png"
         this.enemyFrame = 0
 
         // find menu
@@ -66,7 +74,6 @@ export default class BattleScreen {
 
         // find buttons
         this.fightButton = document.querySelector("#fight-button")
-        this.switchButton = document.querySelector("#switch-button")
 
         // find fight choice buttons
         this.fight1 = document.querySelector("#fight1")
@@ -106,56 +113,92 @@ export default class BattleScreen {
         // create HUD dialogue text
         this.dialogue = document.createElement("p")
         this.dialogue.classList.add("dialogue")
-        this.dialogue.innerText = "What will X do..."
+        this.dialogue.innerText = "Insert Dialogue..."
         this.dialogue.style.color = "white"
         this.dialogue.style.fontSize = "20px"
         this.dialogue.style.fontFamily = "sans-serif"
         this.dialogue.style.fontWeight = "bold"
         this.dialogue.style.position = "absolute"
         this.dialogue.style.top = "30px"
-        this.dialogue.style.left = "310px"
+        this.dialogue.style.left = "300px"
         this.dialogue.style.zIndex = "1"
         this.menu.appendChild(this.dialogue)
+
+        // create health bar borders
+        // player health bar border
+        this.playerHealthBarBorder = document.createElement("div")
+        this.playerHealthBarBorder.classList.add("player-hp-border")
+        this.playerHealthBarBorder.style.backgroundColor = "black"
+        this.playerHealthBarBorder.style.width = "260px"
+        this.playerHealthBarBorder.style.height = "20px"
+        this.playerHealthBarBorder.style.position = "absolute"
+        this.playerHealthBarBorder.style.top = "10px"
+        this.playerHealthBarBorder.style.left = "10px"
+        this.playerHealthBarBorder.style.zIndex = "1"
+        this.playerHealthBarBorder.style.border = "4px solid black"
+        this.menu.appendChild(this.playerHealthBarBorder)
+
+        // enemy health bar border
+        this.enemyHealthBarBorder = document.createElement("div")
+        this.enemyHealthBarBorder.classList.add("enemy-hp-border")
+        this.enemyHealthBarBorder.style.backgroundColor = "black"
+        this.enemyHealthBarBorder.style.width = "260px"
+        this.enemyHealthBarBorder.style.height = "20px"
+        this.enemyHealthBarBorder.style.position = "absolute"
+        this.enemyHealthBarBorder.style.top = "10px"
+        this.enemyHealthBarBorder.style.right = "10px"
+        this.enemyHealthBarBorder.style.zIndex = "1"
+        this.enemyHealthBarBorder.style.border = "4px solid black"
+        this.menu.appendChild(this.enemyHealthBarBorder)
 
         // create health bars
         // player health bar
         this.playerHealthBar = document.createElement("div")
         this.playerHealthBar.classList.add("player-hp")
-        this.playerHealthBar.style.backgroundColor = "red"
+        this.playerHealthBar.style.backgroundColor = "darkred"
         this.playerHealthBar.style.width = "260px"
         this.playerHealthBar.style.height = "20px"
         this.playerHealthBar.style.position = "absolute"
         this.playerHealthBar.style.top = "10px"
         this.playerHealthBar.style.left = "10px"
         this.playerHealthBar.style.zIndex = "1"
+        // make a black border around the health bar
+        this.playerHealthBar.style.border = "4px solid black"
         this.menu.appendChild(this.playerHealthBar)
 
         // enemy health bar
         this.enemyHealthBar = document.createElement("div")
         this.enemyHealthBar.classList.add("enemy-hp")
-        this.enemyHealthBar.style.backgroundColor = "red"
+        this.enemyHealthBar.style.backgroundColor = "darkred"
         this.enemyHealthBar.style.width = "260px"
         this.enemyHealthBar.style.height = "20px"
         this.enemyHealthBar.style.position = "absolute"
         this.enemyHealthBar.style.top = "10px"
         this.enemyHealthBar.style.right = "10px"
         this.enemyHealthBar.style.zIndex = "1"
+        // make a black border around the health bar
+        this.enemyHealthBar.style.border = "4px solid black"
         this.menu.appendChild(this.enemyHealthBar)
 
         // start a new battle
-        this.battle = new Battle(this.menu)
+        this.battle = new Battle2(overworld)
         this.battle.init()
     }
-    
+
     init() {
+        this.menu.style.display = "flex"
         this.fightButton.addEventListener("click", () => {
+            this.battle.onFightButton()
             this.fightButton.style.display = "none"
-            this.switchButton.style.display = "none"
             this.miniMenu.style.flexWrap = "wrap"
             this.fight1.style.display = "block"
             this.fight2.style.display = "block"
             this.fight3.style.display = "block"
             this.fight4.style.display = "block"
+            this.fight1.addEventListener("click", () => {this.battle.onFight1()})
+            this.fight2.addEventListener("click", () => {this.battle.onFight2()})
+            this.fight3.addEventListener("click", () => {this.battle.onFight3()})
+            this.fight4.addEventListener("click", () => {this.battle.onFight4()})
         })
         this.menu.style.display = "flex"
         this.battleScreenArt.onload = () => {
@@ -188,33 +231,32 @@ export default class BattleScreen {
             this.playerCanvas.width, this.playerCanvas.height, 
             -50, 400, 
             this.playerCanvas.width * 6, this.playerCanvas.height * 6
-            )
-        }
-
-        // image, 
-        // sourceX, sourceY, 
-        // sourceWidth, sourceHeight, 
-        // destinationX, destinationY, 
-        // destinationWidth, destinationHeight
+        )
+    }
 
     drawEnemy() { // animating with spritesheet
-        // 64 x 32
-        let slimeWidth = 64
-        let slimeHeight = 32
-        let slimeFrames = 5
+        // 320/5 x 64
+        let dragonWidth = 64
+        let dragonHeight = 64
+        let dragonFrames = 5
         let slowDown = 3
-        let scaling = 12
-
-        if (this.enemyFrame < slimeFrames * slowDown) {this.enemyFrame++}
+        let scaling = 8
+        
+        if (this.enemyFrame < dragonFrames * slowDown) {this.enemyFrame++}
         else {this.enemyFrame = 0}
         this.enemyContext.clearRect(0, 0, this.enemyCanvas.width, this.enemyCanvas.height)
         this.enemyContext.drawImage(
-            this.slime, 
-            (Math.floor(this.enemyFrame / slowDown) * slimeWidth), 0, // this slices the spritesheet into frames
-            // slimeWidth * scaling, slimeHeight * scaling, 
-            1000, 1000,
-            200, 470, 
+            this.dragon, 
+            (Math.floor(this.enemyFrame / slowDown) * dragonWidth), 0, // this slices the spritesheet into frames
+            500, 800,
+            0, 250,
             this.enemyCanvas.width * scaling, this.enemyCanvas.height * scaling
         )
     }
 }
+
+    // image, ///
+    // sourceX, sourceY, ///
+    // sourceWidth, sourceHeight, 
+    // destinationX, destinationY, 
+    // destinationWidth, destinationHeight

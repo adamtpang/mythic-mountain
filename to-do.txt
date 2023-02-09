@@ -1,27 +1,8 @@
-follow and send the scorecard
-make sure instructions are finished
-do the WIDTHpx string parsing
-then get them to decrement based on the starting hp of the units
-Battle Scene
+put pseudocode everywhere
+put console logs everywhere
+////////////////////////////////////////////////////////////////
 
-    start
-
-    player turn
-    <CYCLE BETWEEN>
-    enemy turn
-
-    BOOLEAN
-    won
-    lost
-
-Start screen
-    get the start button to move to story intermission ||= Battle Scene
-
-Story intermission
-
-
-make the start button turn on the music
-    make it so that the audio.play() is linked to the look of the mute button
+make the buttons spammer proof
 match the button art and fonts with the game art and music and character assets
 make a start button appear over the canvas
     make it console.log(clicked)
@@ -78,3 +59,8 @@ go back to the drawing board of milanote, and get to the bottom of my todolist i
 put a back HP image so the red line isnt left floating
 autoplay the music, then the mute button is always there
 Make a volume scale for mythic mountain
+make enemies randomly choose their moves
+add the fight animations
+follow and send the scorecard
+make sure instructions are finished
+    make it so that the audio.play() is linked to the look of the mute button

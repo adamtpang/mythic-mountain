@@ -1,4 +1,5 @@
-import BattleScreen from "./battle-screen.js"
+import BattleScreen1 from "./battleScreen1.js"
+import Cutscene1 from "./cutscene1.js"
 
 export default class StartScreen {
     constructor(overworld) {
@@ -30,7 +31,7 @@ export default class StartScreen {
 
         this.startButton.addEventListener("click", () => {
             this.gameContainer.removeChild(this.startButton)
-            this.overworld.changeScreen(BattleScreen)
+            this.overworld.changeScreen(Cutscene1)
         })
     }
 }

@@ -46,7 +46,7 @@ body {
 }
 
 .menu {
-    display: flex;
+    display: none;
     flex-direction: row;
     justify-content: space-between;
     position: relative;
@@ -69,17 +69,9 @@ body {
 #fight-button {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 35px;
-    width: 144px;
-    background-image: url("../assets/menu/fight square.png");
-    border: 2px solid gold;
-}
-
-#switch-button {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 35px;
-    width: 144px;
-    background-image: url("../assets/menu/switch square.png");
-    border: 2px solid gold;
+    width: 287px;
+    background-color: salmon;
+    border: 10px solid gold;
 }
 
 .fight-choice {

@@ -1,5 +1,9 @@
 import StartScreen from "./start-screen"
-import BattleScreen from "./battle-screen"
+import Cutscene1 from "./cutscene1"
+import BattleScreen1 from "./battleScreen1"
+import Cutscene15 from "./cutscene15"
+import BattleScreen2 from "./battleScreen2"
+import Cutscene2 from "./cutscene2"
 
 export default class Overworld {
     constructor(config) {
@@ -15,7 +19,7 @@ export default class Overworld {
         this.audio = new Audio()
         this.audio.loop = true
         this.audio.muted = true
-        this.audio.volume = 0.2
+        this.audio.volume = 0.5
 
         // find menu
         this.menu = document.querySelector(".menu")
@@ -32,12 +36,14 @@ export default class Overworld {
                 button.innerHTML="<img src='assets/overworld/unmute_icon.png' alt='unmuted'></img>"
             }
         })
-        this.currentScreen = new StartScreen(this)
+        this.currentScreen = new BattleScreen1(this)
         this.currentScreen.init()
     }
 
     changeScreen(screen) {
         this.currentScreen = new screen(this)
+        this.currentScreen.audio.muted = false
+        this.currentScreen.audio.play()
         this.currentScreen.init()
     }
 }

@@ -1,23 +1,21 @@
 import Unit from "./unit.js"
 import BattleHUD from "./battleHUD.js"
-import BattleScreen2 from "./battleScreen2.js"
-import Cutscene15 from "./cutscene15.js"
-export default class Battle {
-    constructor(overworld, playerCanvas, enemyCanvas) {
-        this.playerCanvas = playerCanvas
-        this.enemyCanvas = enemyCanvas
+import Cutscene2 from "./cutscene2.js"
+
+export default class Battle2 {
+    constructor(overworld) {
         this.overworld = overworld
-        this.player = new Unit("Astalor", 100, "player", [
-            {"Sword Slice": [30, 100]}, 
-            {"Sword Slash": [40, 80]}, 
-            {"Fire Blast": [120, 100]}, // dont forget to change this
-            {"Eat Coal": [30, 100]}
+        this.player = new Unit("Astalor", 150, "player", [
+            {"Sword Slice": [40, 100]}, 
+            {"Sword Slash": [50, 80]}, 
+            {"King's Strike": [90, 70]},
+            {"Eat Coal": [40, 100]}
         ])
-        this.enemy = new Unit("Draymond", 120, "enemy", [
-            {"Tackle": [20, 100]},
-            {"Bash": [40, 80]},
-            {"Body Slam": [50, 60]},
-            {"Drink Slime": [30, 100]}
+        this.enemy = new Unit("Robert", 400, "enemy", [
+            {"Roar": [30, 100]},
+            {"Dragon Tail": [50, 80]},
+            {"Supernova Spit": [80, 60]},
+            {"Eat Coal": [50, 100]}
         ])
         this.playerHUD = new BattleHUD(this.player) // player HUD
         this.enemyHUD = new BattleHUD(this.enemy) // enemy HUD
@@ -46,22 +44,7 @@ export default class Battle {
         this.playerTurn()
     }
 
-    disableButtons() {
-        this.choice1.disabled = true
-        this.choice2.disabled = true
-        this.choice3.disabled = true
-        this.choice4.disabled = true
-    }
-
-    enableButtons() {
-        this.choice1.disabled = false
-        this.choice2.disabled = false
-        this.choice3.disabled = false
-        this.choice4.disabled = false
-    }
-
     onFight1() { // small attack
-        this.disableButtons()
         if (this.battleState !== "PlayerTurn") return
         this.dialogue.innerText = `${this.player.name} used ${this.player.move1.name}!`
         setTimeout(() => {
@@ -70,7 +53,6 @@ export default class Battle {
     }
 
     onFight2() { // medium attack
-        this.disableButtons()
         if (this.battleState !== "PlayerTurn") return
         this.dialogue.innerText = `${this.player.name} used ${this.player.move2.name}!`
         setTimeout(() => {
@@ -79,7 +61,6 @@ export default class Battle {
     }
 
     onFight3() { // big attack
-        this.disableButtons()
         if (this.battleState !== "PlayerTurn") return
         this.dialogue.innerText = `${this.player.name} used ${this.player.move3.name}!`
         setTimeout(() => {
@@ -88,7 +69,6 @@ export default class Battle {
     }
 
     onFight4() { // heal
-        this.disableButtons()
         if (this.battleState !== "PlayerTurn") return
         this.dialogue.innerText = `${this.player.name} used ${this.player.move4.name}!`
         setTimeout(() => {
@@ -100,7 +80,6 @@ export default class Battle {
 
     playerTurn() { // player turn
         console.log("Player Turn")
-        this.enableButtons()
         this.battleState = "PlayerTurn"
         this.dialogue.innerText = "Choose a move!"
     }
@@ -216,10 +195,7 @@ export default class Battle {
         if (this.battleState === "PlayerWin") {
             this.dialogue.innerText = "You won!"
             setTimeout(() => {
-                // this.overworld.element.style.display = "none"
-                this.playerCanvas.style.display = "none"
-                this.enemyCanvas.style.display = "none"
-                this.overworld.changeScreen(Cutscene15)
+                this.overworld.changeScreen(Cutscene2)
             }, this.dialogueDelay + 2000)
         } else if (this.battleState === "EnemyWin") {
             this.dialogue.innerText = "You lost!"

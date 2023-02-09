@@ -1,3 +1,88 @@
-body{background:#01040b;overflow:hidden}.game-container{position:relative;width:1147px;height:800px;margin:0 auto;top:50;cursor:url("../assets/overworld/cursor1.png"),auto}.game-container .game-canvas{position:absolute}.player-canvas{position:relative}.enemy-canvas{position:relative}.game-container img{position:absolute;left:42%;top:80%;background-clip:padding-box;border-radius:15px}#mute-button{border:none;background-color:rgba(0,0,0,0)}#mute-button img{width:40px;height:40px}.menu{display:flex;flex-direction:row;justify-content:space-between;position:relative;width:1147px;height:120px;margin:0 auto;cursor:url("../assets/overworld/cursor1.png"),auto}.mini-menu{display:flex;flex-direction:row;justify-content:space-between;position:relative;width:287;height:120px;margin:0 auto}#fight-button{font-family:"Franklin Gothic Medium","Arial Narrow",Arial,sans-serif;font-size:35px;width:144px;background-image:url("../assets/menu/fight square.png");border:2px solid gold}#switch-button{font-family:"Franklin Gothic Medium","Arial Narrow",Arial,sans-serif;font-size:35px;width:144px;background-image:url("../assets/menu/switch square.png");border:2px solid gold}.fight-choice{font-family:"Franklin Gothic Medium","Arial Narrow",Arial,sans-serif;width:50%;font-size:20px;display:none}.fight-choice button{border:none;width:144px;height:60px}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+body {
+  background: rgb(1, 4, 11);
+  overflow: hidden;
+}
 
-/*# sourceMappingURL=main.css.map*/
+.game-container {
+  position: relative;
+  width: 1147px;
+  height: 800px;
+  margin: 0 auto;
+  top: 50;
+  cursor: url("../assets/overworld/cursor1.png"), auto;
+}
+
+.game-container .game-canvas {
+  position: absolute;
+}
+
+.player-canvas {
+  position: relative;
+}
+
+.enemy-canvas {
+  position: relative;
+}
+
+.game-container img {
+  position: absolute;
+  left: 42%;
+  top: 80%;
+  background-clip: padding-box;
+  border-radius: 15px;
+}
+
+#mute-button {
+  border: none;
+  background-color: transparent;
+}
+
+#mute-button img {
+  width: 40px;
+  height: 40px;
+}
+
+.menu {
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  width: 1147px;
+  height: 120px;
+  margin: 0 auto;
+  cursor: url("../assets/overworld/cursor1.png"), auto;
+}
+
+.mini-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  width: 287;
+  height: 120px;
+  margin: 0 auto;
+}
+
+#fight-button {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 35px;
+  width: 287px;
+  background-color: salmon;
+  border: 10px solid gold;
+}
+
+.fight-choice {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  width: 50%;
+  font-size: 20px;
+  display: none;
+}
+
+.fight-choice button {
+  border: none;
+  width: 144px;
+  height: 60px;
+}
