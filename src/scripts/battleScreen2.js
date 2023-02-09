@@ -66,8 +66,12 @@ export default class BattleScreen2 {
         this.dragon.src = "../assets/battle-screen2-art/dragon/dragon_idle 1.png"
         this.enemyFrame = 0
 
-        // find menu
+        // found menu from overworld
         this.menu = document.querySelector(".menu")
+        this.menu.removeChild(this.menu.children[6])
+        this.menu.removeChild(this.menu.children[5])
+        this.menu.removeChild(this.menu.children[4])
+        console.log(this.menu.children)
 
         // find mini menu
         this.miniMenu = document.querySelector(".mini-menu")
@@ -187,6 +191,11 @@ export default class BattleScreen2 {
 
     init() {
         this.menu.style.display = "flex"
+        this.fightButton.style.display = "block"
+        this.fight1.style.display = "none"
+        this.fight2.style.display = "none"
+        this.fight3.style.display = "none"
+        this.fight4.style.display = "none"
         this.fightButton.addEventListener("click", () => {
             this.battle.onFightButton()
             this.fightButton.style.display = "none"

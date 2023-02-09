@@ -217,10 +217,11 @@ export default class Battle {
             this.dialogue.innerText = "You won!"
             setTimeout(() => {
                 // this.overworld.element.style.display = "none"
+                this.enableButtons()
                 this.playerCanvas.style.display = "none"
                 this.enemyCanvas.style.display = "none"
                 this.overworld.changeScreen(Cutscene15)
-            }, this.dialogueDelay + 2000)
+            }, this.dialogueDelay)
         } else if (this.battleState === "EnemyWin") {
             this.dialogue.innerText = "You lost!"
         }

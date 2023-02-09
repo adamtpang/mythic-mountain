@@ -45,6 +45,7 @@ export default class Battle2 {
     }
 
     onFight1() { // small attack
+        console.log("small attack")
         if (this.battleState !== "PlayerTurn") return
         this.dialogue.innerText = `${this.player.name} used ${this.player.move1.name}!`
         setTimeout(() => {
