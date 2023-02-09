@@ -2,15 +2,15 @@
 
 ## Background
 
-"Mythic Mountain" is a medieval-style, pokemon-style-combat browser rpg. You play as a nameless hero who fights his way up a mountain to slay the tyrannical dragon who threatens to burn the town below if its citizens stop pledging fealty through sacrifices. As you make your way up the mountain, you recruit allies on the same mission.
+"Mythic Mountain" is a medieval-style, pokemon-style-combat browser rpg. You play as a hero who fights his way up a mountain to slay a dragon.
 
 ## Functionality & MVPs
 
-You'll be able to fight foes using the current player from your party in combat.
-
-They'll be health bars for characters and enemies, and a party system, so the user can switch characters in and out of combat, just like Pokémon.
+There will be health bars for characters and enemies.
 
 ## Wireframes
+
+![Image from Mythic Mountain](https://app.milanote.com/media/p/images/1PqeRj1LS9tFbt/EXm/wireframe.png?w=800)
 
 ![Image from Mythic Mountain](https://app.milanote.com/media/p/images/1PnHGG1QDZG9a9/Tux/mythic%20mountain%20wireframe.png?w=800)
 
@@ -18,13 +18,14 @@ Players can fight enemies or switch out to any character in their party. Every c
 
 ## Technologies, Libraries, APIs
 
-I'll be using HTML, CSS, JS, Webpack, npm, and Canvas' API to render the board.
+I'll be using HTML, CSS, JS, Webpack, npm, and HTML Canvas to render the board.
 
 ## Bonus features
 
 
 - [ ] More levels
 - [ ] Overworld traversal
+- [ ] difficulty choice
 
 ## **Implementation Timeline**
 
@@ -35,25 +36,25 @@ I'll be using HTML, CSS, JS, Webpack, npm, and Canvas' API to render the board.
 
 - [ ] Find the assets I'm going to use (Character design and battle landscape/background)
 
-## Friday
-
-
-- [ ] Code out the basic game logic and game states with basic assets
-
-## Saturday
-
-
-- [ ] Code out a game start screen and layout
-
 ## Sunday
 
 
 - [ ] Write out the story text and setup the story screens between battles. Also write the death text when a player loses along the way up the mountain, and has to restart the game
 
+## Friday
+
+
+- [ ] Code out the basic game logic and game states with basic assets
+
 ## Monday
 
 
 - [ ] Allow user to pick the next level from a mountain screen
+
+## Saturday
+
+
+- [ ] Code out a game start screen and layout
 
 ## Tuesday
 

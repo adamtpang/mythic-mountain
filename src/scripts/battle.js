@@ -1,6 +1,5 @@
 import BattleHUD from "./battleHUD.js"
 import Cutscene2 from "./cutscene2.js"
-import BattleScreen2 from "./battleScreen2.js"
 import Cutscene3 from "./cutscene3.js"
 export default class Battle {
     constructor(overworld, playerCanvas, enemyCanvas, player, enemy) {
@@ -25,7 +24,6 @@ export default class Battle {
     }
     
     init() { // battle initiation
-        console.log("Battle Initiated")
         this.playerHUD.setHUD() // sets the HUD
         this.enemyHUD.setHUD() // sets the HUD
         this.dialogue.innerText = `A wild ${this.enemy.name} appeared!` 
@@ -89,20 +87,17 @@ export default class Battle {
     // its dialogue setting, then action
 
     playerTurn() { // player turn
-        console.log("Player Turn")
         this.enableButtons()
         this.battleState = "PlayerTurn"
         this.dialogue.innerText = "Choose a move!"
     }
 
     enemyTurn() { // enemy turn
-        console.log("Enemy Turn")
         this.battleState = "EnemyTurn"
         this.dialogue.innerText = `${this.enemy.name} is thinking...`
     }
 
     playerAttack(damage, accuracy) { // player attacks
-        console.log("Player Attack")
         if (Math.random() * 100 > accuracy) { // if the move misses
             this.battleState = "EnemyTurn"
             this.dialogue.innerText = "The attack missed!"
@@ -133,7 +128,6 @@ export default class Battle {
     }
     
     enemyAttack(damage, accuracy) { // enemy attacks
-        console.log("Enemy Attack")
         if (Math.random() * 100 > accuracy) { // if the move misses
             this.battleState = "PlayerTurn"
             this.dialogue.innerText = "The attack missed!"
@@ -162,7 +156,6 @@ export default class Battle {
     }
 
     enemyChoosesMove() { // enemy chooses move
-        console.log("Enemy Chooses Move")
         let enemyMoves = [this.enemy.move1, this.enemy.move2, this.enemy.move3, this.enemy.move4]
         let randomMove = enemyMoves[Math.floor(Math.random() * enemyMoves.length)]
         if (randomMove === this.enemy.move4) { // if the move is heal
@@ -179,7 +172,6 @@ export default class Battle {
     }
 
     playerHeal(healing) { // player heals
-        console.log("Player Heal")
         this.player.heal(healing)
         this.playerHUD.setHP(this.player.currentHP / this.player.maxHP)
         this.battleState = "EnemyTurn"
@@ -191,7 +183,6 @@ export default class Battle {
     }
 
     enemyHeal(healing) { // enemy heals
-        console.log("Enemy Heal")
         this.enemy.heal(healing)
         this.enemyHUD.setHP(this.enemy.currentHP / this.enemy.maxHP)
         this.battleState = "PlayerTurn"
@@ -202,7 +193,6 @@ export default class Battle {
     }
 
     endBattle() { // ends the battle
-        console.log("Battle Ended")
         if (this.battleState === "PlayerWin") { // if player wins
             this.dialogue.innerText = "You won!"
             setTimeout(() => {

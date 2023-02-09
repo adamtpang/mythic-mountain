@@ -58,7 +58,6 @@ export default class Cutscene3 {
         }
         this.textFrame.addEventListener("click", () => {
             this.gameContainer.removeChild(this.textFrame)
-            console.log("clicked")
             this.overworld.changeScreen(StartScreen)
         })
     }

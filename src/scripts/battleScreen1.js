@@ -243,7 +243,6 @@ export default class BattleScreen1 {
     drawEnemy() { // animating with spritesheet
         // 64 x 32
         let slimeWidth = 64
-        let slimeHeight = 32
         let slimeFrames = 5
         let slowDown = 3
         let scaling = 12
@@ -254,7 +253,6 @@ export default class BattleScreen1 {
         this.enemyContext.drawImage(
             this.slime, 
             (Math.floor(this.enemyFrame / slowDown) * slimeWidth), 0, // this slices the spritesheet into frames
-            // slimeWidth * scaling, slimeHeight * scaling, 
             1000, 1000,
             200, 470, 
             this.enemyCanvas.width * scaling, this.enemyCanvas.height * scaling

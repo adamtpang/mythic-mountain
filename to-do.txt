@@ -1,7 +1,6 @@
 put pseudocode everywhere
 put console logs everywhere
 ////////////////////////////////////////////////////////////////
-add animations if I have time
 instructions in the readme
 make the buttons spammer proof
 match the button art and fonts with the game art and music and character assets
@@ -65,3 +64,4 @@ add the fight animations
 follow and send the scorecard
 make sure instructions are finished
     make it so that the audio.play() is linked to the look of the mute button
+add animations if I have time

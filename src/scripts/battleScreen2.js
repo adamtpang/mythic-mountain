@@ -70,7 +70,6 @@ export default class BattleScreen2 {
         // find all p tags in menu
         this.menuP = document.querySelectorAll("p")
 
-        console.log(this.menu.children)
         // remove all p tags from menu
         for (let i = 0; i < this.menuP.length; i++) {
             this.menuP[i].remove()
