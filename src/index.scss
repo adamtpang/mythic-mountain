@@ -9,7 +9,7 @@ body {
     height: 800px;
     margin: 0 auto;
     top: 50;
-    cursor: url('assets/overworld/cursor1.png'), auto;
+    cursor: url("../assets/overworld/cursor1.png"), auto;
 }
 
 .game-container .game-canvas {
@@ -53,7 +53,7 @@ body {
     width: 1147px;
     height: 120px;
     margin: 0 auto;
-    cursor: url('assets/overworld/cursor1.png'), auto;
+    cursor: url("../assets/overworld/cursor1.png"), auto;
 }
 
 .mini-menu {
@@ -85,4 +85,55 @@ body {
     border: none;
     width: 144px;
     height: 60px;
+}
+
+.github-button {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+.linkedin-button {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+.github-button img {
+    position: relative;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+}
+
+.linkedin-button img {
+    position: relative;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    width: 1147px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+#link-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 120px;
+    position: relative;
+    transform: translateY(25%);
 }
