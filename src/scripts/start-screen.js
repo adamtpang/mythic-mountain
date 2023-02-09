@@ -12,11 +12,11 @@ export default class StartScreen {
         // create start screen art and start button
         this.startScreenArt = new Image()
         this.startButton = new Image()
-        this.startScreenArt.src = "../assets/start-screen/Start Screen.png"
-        this.startButton.src = "../assets/start-screen/Start Button.png"
+        this.startScreenArt.src = "assets/start-screen/Start Screen.png"
+        this.startButton.src = "assets/start-screen/Start Button.png"
 
         // change audio
-        this.audio.src = "../music/xDeviruchi - Title Theme .wav"
+        this.audio.src = "music/xDeviruchi - Title Theme .wav"
 
         // find menu
         this.menu = document.querySelector(".menu")

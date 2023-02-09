@@ -10,7 +10,7 @@ export default class Cutscene1 {
 
         // create cutscene art
         this.cutsceneArt = new Image()
-        this.cutsceneArt.src = "../assets/cutscene/above-mountains.png"
+        this.cutsceneArt.src = "assets/cutscene/above-mountains.png"
 
         // create cutscene textframe with html. and make it have a gray translucent background
         this.textFrame = document.createElement("div")

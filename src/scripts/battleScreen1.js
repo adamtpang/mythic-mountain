@@ -9,10 +9,10 @@ export default class BattleScreen1 {
 
         // create battle screen art
         this.battleScreenArt = new Image()
-        this.battleScreenArt.src = "../assets/battle-screen-art/twilight-pond.png";
+        this.battleScreenArt.src = "assets/battle-screen-art/twilight-pond.png";
 
         // change audio
-        this.audio.src = "../music/xDeviruchi - And The Journey Begins .wav"
+        this.audio.src = "music/xDeviruchi - And The Journey Begins .wav"
 
         // create sprite canvases
         this.playerCanvas = document.createElement("canvas")
@@ -42,19 +42,19 @@ export default class BattleScreen1 {
         this.fireknight6 = new Image()
         this.fireknight7 = new Image()
         this.fireknight8 = new Image()
-        this.fireknight1.src = "../assets/battle-screen-art/fireknight/idle_1.png"
-        this.fireknight2.src = "../assets/battle-screen-art/fireknight/idle_2.png"
-        this.fireknight3.src = "../assets/battle-screen-art/fireknight/idle_3.png"
-        this.fireknight4.src = "../assets/battle-screen-art/fireknight/idle_4.png"
-        this.fireknight5.src = "../assets/battle-screen-art/fireknight/idle_5.png"
-        this.fireknight6.src = "../assets/battle-screen-art/fireknight/idle_6.png"
-        this.fireknight7.src = "../assets/battle-screen-art/fireknight/idle_7.png"
-        this.fireknight8.src = "../assets/battle-screen-art/fireknight/idle_8.png"
+        this.fireknight1.src = "assets/battle-screen-art/fireknight/idle_1.png"
+        this.fireknight2.src = "assets/battle-screen-art/fireknight/idle_2.png"
+        this.fireknight3.src = "assets/battle-screen-art/fireknight/idle_3.png"
+        this.fireknight4.src = "assets/battle-screen-art/fireknight/idle_4.png"
+        this.fireknight5.src = "assets/battle-screen-art/fireknight/idle_5.png"
+        this.fireknight6.src = "assets/battle-screen-art/fireknight/idle_6.png"
+        this.fireknight7.src = "assets/battle-screen-art/fireknight/idle_7.png"
+        this.fireknight8.src = "assets/battle-screen-art/fireknight/idle_8.png"
         this.playerFrame = 0
 
         // create slime
         this.slime = new Image()
-        this.slime.src = "../assets/battle-screen-art/slime/slime_idle.png"
+        this.slime.src = "assets/battle-screen-art/slime/slime_idle.png"
         this.enemyFrame = 0
 
         // find menu
