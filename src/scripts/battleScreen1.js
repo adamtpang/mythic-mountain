@@ -1,4 +1,5 @@
 import Battle from "./battle.js"
+import Unit from "./unit.js"
 
 export default class BattleScreen1 {
     constructor(overworld) {
@@ -172,7 +173,21 @@ export default class BattleScreen1 {
         this.menu.appendChild(this.enemyHealthBar)
 
         // start a new battle
-        this.battle = new Battle(overworld, this.playerCanvas, this.enemyCanvas)
+        let player = new Unit("Astalor", 100, "player", [
+            {"Sword Slice": [30, 100]}, 
+            {"Sword Slash": [40, 80]}, 
+            {"Fire Blast": [70, 70]},
+            {"Eat Coal": [30, 100]}
+        ])
+
+        let enemy = new Unit("Draymond", 120, "enemy", [
+            {"Tackle": [20, 100]},
+            {"Bash": [40, 80]},
+            {"Body Slam": [50, 60]},
+            {"Drink Slime": [30, 100]}
+        ])
+
+        this.battle = new Battle(overworld, this.playerCanvas, this.enemyCanvas, player, enemy)
         this.battle.init()
     }
 

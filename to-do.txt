@@ -1,7 +1,8 @@
 put pseudocode everywhere
 put console logs everywhere
 ////////////////////////////////////////////////////////////////
-
+add animations if I have time
+instructions in the readme
 make the buttons spammer proof
 match the button art and fonts with the game art and music and character assets
 make a start button appear over the canvas

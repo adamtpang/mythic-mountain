@@ -1,24 +1,14 @@
-import Unit from "./unit.js"
 import BattleHUD from "./battleHUD.js"
+import Cutscene2 from "./cutscene2.js"
 import BattleScreen2 from "./battleScreen2.js"
-import Cutscene15 from "./cutscene15.js"
+import Cutscene3 from "./cutscene3.js"
 export default class Battle {
-    constructor(overworld, playerCanvas, enemyCanvas) {
+    constructor(overworld, playerCanvas, enemyCanvas, player, enemy) {
+        this.player = player
+        this.enemy = enemy
         this.playerCanvas = playerCanvas
         this.enemyCanvas = enemyCanvas
         this.overworld = overworld
-        this.player = new Unit("Astalor", 100, "player", [
-            {"Sword Slice": [30, 100]}, 
-            {"Sword Slash": [40, 80]}, 
-            {"Fire Blast": [120, 100]}, // dont forget to change this
-            {"Eat Coal": [30, 100]}
-        ])
-        this.enemy = new Unit("Draymond", 120, "enemy", [
-            {"Tackle": [20, 100]},
-            {"Bash": [40, 80]},
-            {"Body Slam": [50, 60]},
-            {"Drink Slime": [30, 100]}
-        ])
         this.playerHUD = new BattleHUD(this.player) // player HUD
         this.enemyHUD = new BattleHUD(this.enemy) // enemy HUD
         this.dialogue = document.getElementsByClassName("dialogue")[0]
@@ -213,16 +203,19 @@ export default class Battle {
 
     endBattle() { // ends the battle
         console.log("Battle Ended")
-        if (this.battleState === "PlayerWin") {
+        if (this.battleState === "PlayerWin") { // if player wins
             this.dialogue.innerText = "You won!"
             setTimeout(() => {
-                // this.overworld.element.style.display = "none"
                 this.enableButtons()
                 this.playerCanvas.style.display = "none"
                 this.enemyCanvas.style.display = "none"
-                this.overworld.changeScreen(Cutscene15)
+                if (this.enemy.name === "Draymond") {
+                    this.overworld.changeScreen(Cutscene2)
+                } else if (this.enemy.name === "Robert") {
+                    this.overworld.changeScreen(Cutscene3)
+                }
             }, this.dialogueDelay)
-        } else if (this.battleState === "EnemyWin") {
+        } else if (this.battleState === "EnemyWin") { // if enemy wins
             this.dialogue.innerText = "You lost!"
         }
     }

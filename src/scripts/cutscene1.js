@@ -40,7 +40,6 @@ export default class Cutscene1 {
         this.textFrame.style.color = "white"
         this.textFrame.style.fontFamily = "sans-serif"
         this.gameContainer.appendChild(this.textFrame)
-        console.log(this.textFrame.innerHTML)
 
         // change audio
         this.audio.src = "music/xDeviruchi - Mysterious Dungeon.wav"

@@ -1,9 +1,9 @@
 import StartScreen from "./start-screen"
 import Cutscene1 from "./cutscene1"
 import BattleScreen1 from "./battleScreen1"
-import Cutscene15 from "./cutscene15"
-import BattleScreen2 from "./battleScreen2"
 import Cutscene2 from "./cutscene2"
+import BattleScreen2 from "./battleScreen2"
+import Cutscene3 from "./cutscene3"
 
 export default class Overworld {
     constructor(config) {
@@ -36,7 +36,7 @@ export default class Overworld {
                 button.innerHTML="<img src='assets/overworld/unmute_icon.png' alt='unmuted'></img>"
             }
         })
-        this.currentScreen = new BattleScreen1(this)
+        this.currentScreen = new StartScreen(this)
         this.currentScreen.init()
     }
 

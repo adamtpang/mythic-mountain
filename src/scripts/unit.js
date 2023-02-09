@@ -24,11 +24,6 @@ export default class Unit {
         this.move1.accuracy = Object.values(this.move1Hash)[0][1]
         this.move2.accuracy = Object.values(this.move2Hash)[0][1]
         this.move3.accuracy = Object.values(this.move3Hash)[0][1]
-
-        console.log(this.move1)
-        console.log(this.move2)
-        console.log(this.move3)
-        console.log(this.move4)
     }
 
     takeDamage(damage) {
