@@ -4,25 +4,6 @@
 
 [Mythic Mountain](https://bubbapang.github.io/mythic-mountain/)
 
-## **Implementation Timeline**
-
-## Background
-
-"Mythic Mountain" is a medieval-style, pokemon-style-combat browser rpg. You play as a hero who fights his way up a mountain to slay a dragon.
-
-## Instructions
-
-Choose between 4 moves to defeat your enemies.
-
-## Functionality & MVPs
-
-There will be health bars for characters and enemies.
-
-## Friday
-
-
-- [ ] Code out the basic game logic and game states with basic assets
-
 ## Technical Implementations
 
 1st pic => My animation code. Looping through Images to animate the player sprite, and slicing a spritesheet for the enemy sprite.
@@ -33,10 +14,36 @@ There will be health bars for characters and enemies.
 
 ![Image from Mythic Mountain](https://app.milanote.com/media/p/images/1Pqf4h1LS9tFbA/WaF/game%20logic%20code.png)
 
+## Background
+
+"Mythic Mountain" is a medieval-style, pokemon-style-combat browser rpg. You play as a hero who fights his way up a mountain to slay a dragon.
+
+## **Implementation Timeline**
+
+## Thursday
+
+
+- [ ] Setup my development environment and file structure
+
+- [ ] Find the assets I'm going to use (Character design and battle landscape/background)
+
+## Friday
+
+
+- [ ] Code out the basic game logic and game states with basic assets
+
 ## Saturday
 
 
 - [ ] Code out a game start screen and layout
+
+## Instructions
+
+Choose between 4 moves to defeat your enemies.
+
+## Functionality & MVPs
+
+There will be health bars for characters and enemies.
 
 ## Wireframes
 
@@ -57,12 +64,10 @@ I'll be using HTML, CSS, JS, Webpack, npm, and HTML Canvas to render the board.
 - [ ] Overworld traversal
 - [ ] difficulty choice
 
-## Thursday
+## Sunday
 
 
-- [ ] Setup my development environment and file structure
-
-- [ ] Find the assets I'm going to use (Character design and battle landscape/background)
+- [ ] Write out the story text and setup the story screens between battles. Also write the death text when a player loses along the way up the mountain, and has to restart the game
 
 ## Monday
 
@@ -83,8 +88,3 @@ I'll be using HTML, CSS, JS, Webpack, npm, and HTML Canvas to render the board.
 
 
 - [ ] Polish the game and fix any bugs still left
-
-## Sunday
-
-
-- [ ] Write out the story text and setup the story screens between battles. Also write the death text when a player loses along the way up the mountain, and has to restart the game
