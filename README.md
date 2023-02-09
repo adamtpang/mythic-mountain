@@ -1,12 +1,42 @@
 # Mythic Mountain
 
+## Live Link
+
+[Mythic Mountain](https://bubbapang.github.io/mythic-mountain/)
+
+## **Implementation Timeline**
+
 ## Background
 
 "Mythic Mountain" is a medieval-style, pokemon-style-combat browser rpg. You play as a hero who fights his way up a mountain to slay a dragon.
 
+## Instructions
+
+Choose between 4 moves to defeat your enemies.
+
 ## Functionality & MVPs
 
 There will be health bars for characters and enemies.
+
+## Friday
+
+
+- [ ] Code out the basic game logic and game states with basic assets
+
+## Technical Implementations
+
+1st pic => My animation code. Looping through Images to animate the player sprite, and slicing a spritesheet for the enemy sprite.
+
+2nd pic => My Game logic code, which is inspired by classic turn-based combat.
+
+![Image from Mythic Mountain](https://app.milanote.com/media/p/images/1Pqf4h1LS9tFbz/eu5/animating%20code.png?w=800)
+
+![Image from Mythic Mountain](https://app.milanote.com/media/p/images/1Pqf4h1LS9tFbA/WaF/game%20logic%20code.png)
+
+## Saturday
+
+
+- [ ] Code out a game start screen and layout
 
 ## Wireframes
 
@@ -27,8 +57,6 @@ I'll be using HTML, CSS, JS, Webpack, npm, and HTML Canvas to render the board.
 - [ ] Overworld traversal
 - [ ] difficulty choice
 
-## **Implementation Timeline**
-
 ## Thursday
 
 
@@ -36,25 +64,10 @@ I'll be using HTML, CSS, JS, Webpack, npm, and HTML Canvas to render the board.
 
 - [ ] Find the assets I'm going to use (Character design and battle landscape/background)
 
-## Sunday
-
-
-- [ ] Write out the story text and setup the story screens between battles. Also write the death text when a player loses along the way up the mountain, and has to restart the game
-
-## Friday
-
-
-- [ ] Code out the basic game logic and game states with basic assets
-
 ## Monday
 
 
 - [ ] Allow user to pick the next level from a mountain screen
-
-## Saturday
-
-
-- [ ] Code out a game start screen and layout
 
 ## Tuesday
 
@@ -70,3 +83,8 @@ I'll be using HTML, CSS, JS, Webpack, npm, and HTML Canvas to render the board.
 
 
 - [ ] Polish the game and fix any bugs still left
+
+## Sunday
+
+
+- [ ] Write out the story text and setup the story screens between battles. Also write the death text when a player loses along the way up the mountain, and has to restart the game
