@@ -1,3 +1,206 @@
-body{background:#01040b;overflow:hidden}.game-container{position:relative;width:1147px;height:800px;margin:0 auto;top:50;cursor:url("../assets/overworld/cursor1.png"),auto}.game-container .game-canvas{position:absolute}.player-canvas{position:relative}.enemy-canvas{position:relative}.game-container img{position:absolute;left:42%;top:80%;background-clip:padding-box;border-radius:15px}#mute-button{border:none;background-color:rgba(0,0,0,0)}#mute-button img{width:40px;height:40px}.menu{display:none;flex-direction:row;justify-content:space-between;position:relative;width:1147px;height:120px;margin:0 auto;cursor:url("../assets/overworld/cursor1.png"),auto}.mini-menu{display:flex;flex-direction:row;justify-content:space-between;position:relative;width:287;height:120px;margin:0 auto}#fight-button{font-family:"Franklin Gothic Medium","Arial Narrow",Arial,sans-serif;font-size:35px;width:287px;background-color:salmon;border:10px solid gold}.fight-choice{font-family:"Franklin Gothic Medium","Arial Narrow",Arial,sans-serif;width:50%;font-size:20px;display:none}.fight-choice button{border:none;width:144px;height:60px}.github-button{position:relative;top:0;right:0}.linkedin-button{position:relative;top:0;right:0}.github-button img{position:relative;top:0;left:0;border:none;background-color:rgba(0,0,0,0);width:50px;height:50px}.linkedin-button img{position:relative;top:0;left:0;border:none;background-color:rgba(0,0,0,0);width:50px;height:50px}.navbar{display:flex;flex-direction:row;justify-content:space-between;position:relative;width:1147px;height:120px;margin:0 auto}#link-buttons{display:flex;flex-direction:row;justify-content:space-between;width:120px;position:relative;transform:translateY(25%)}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+body {
+  background: rgb(1, 4, 11);
+  overflow: hidden;
+}
 
-/*# sourceMappingURL=main.css.map*/
+.game-container {
+  width: 1147px;
+  height: 800px;
+  margin: 0 auto;
+  cursor: url("../assets/overworld/cursor1.png"), auto;
+  position: relative;
+}
+
+.game-container img {
+  border-radius: 15px;
+  left: 42%;
+  top: 80%;
+  position: absolute;
+  background-clip: padding-box;
+}
+
+.game-container .game-canvas {
+  position: absolute;
+}
+
+.player-canvas {
+  position: relative;
+}
+
+.enemy-canvas {
+  position: relative;
+}
+
+.navbar {
+  width: 1147px;
+  height: 120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+#link-buttons {
+  width: 120px;
+  transform: translateY(25%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+.github-button {
+  top: 0;
+  right: 0;
+  position: relative;
+}
+
+.linkedin-button {
+  top: 0;
+  right: 0;
+  position: relative;
+}
+
+.github-button img {
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border: none;
+  background-color: transparent;
+}
+
+.linkedin-button img {
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border: none;
+  background-color: transparent;
+}
+
+#mute-button {
+  border: none;
+  background-color: transparent;
+}
+
+#mute-button img {
+  width: 40px;
+  height: 40px;
+}
+
+.menu {
+  width: 1147px;
+  height: 120px;
+  margin: 0 auto;
+  cursor: url("../assets/overworld/cursor1.png"), auto;
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+.mini-menu {
+  width: 287;
+  height: 120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+#fight-button {
+  font-size: 35px;
+  width: 287px;
+  border: 10px solid gold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: salmon;
+}
+
+.fight-choice {
+  width: 50%;
+  font-size: 13px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  display: none;
+}
+
+.fight-choice button {
+  width: 144px;
+  height: 60px;
+  border: none;
+}
+
+.player-name,
+.enemy-name {
+  font-size: 30px;
+  font-family: sans-serif;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  color: black;
+  z-index: 1;
+}
+
+.player-name {
+  left: 10px;
+}
+
+.enemy-name {
+  right: 10px;
+}
+
+.dialogue {
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  position: absolute;
+  top: 30px;
+  left: 300px;
+  z-index: 1;
+}
+
+.player-hp-border,
+.enemy-hp-border {
+  background-color: black;
+  width: 260px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  z-index: 1;
+  border: 4px solid black;
+}
+
+.player-hp-border {
+  left: 10px;
+}
+
+.enemy-hp-border {
+  right: 10px;
+}
+
+.player-hp,
+.enemy-hp {
+  background-color: darkred;
+  width: 260px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  z-index: 1;
+  border: 4px solid black;
+}
+
+.player-hp {
+  left: 10px;
+}
+
+.enemy-hp {
+  right: 10px;
+}

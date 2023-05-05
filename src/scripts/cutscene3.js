@@ -1,28 +1,29 @@
-import StartScreen from "./start-screen"
+import StartScreen from "./start-screen";
+
 export default class Cutscene3 {
-    constructor(overworld) {
-        this.overworld = overworld
-        this.gameContainer = overworld.element
-        this.canvas = overworld.canvas
-        this.context = overworld.context
-        this.audio = overworld.audio
+	constructor(overworld) {
+		this.overworld = overworld;
+		this.gameContainer = overworld.element;
+		this.canvas = overworld.canvas;
+		this.context = overworld.context;
+		this.audio = overworld.audio;
 
-        // find game container
-        this.gameContainer = document.querySelector(".game-container")
+		// find game container
+		this.gameContainer = document.querySelector(".game-container");
 
-        // find menu
-        this.menu = document.querySelector(".menu")
-        
-        // clear menu
-        this.menu.style.display = "none"
+		// find menu
+		this.menu = document.querySelector(".menu");
 
-        // create cutscene art
-        this.cutsceneArt = new Image()
-        this.cutsceneArt.src = "assets/cutscene/mountain-water.png"
+		// clear menu
+		this.menu.style.display = "none";
 
-        // create cutscene textframe with html. and make it have a gray translucent background
-        this.textFrame = document.createElement("div")
-        this.textFrame.innerHTML = `
+		// create cutscene art
+		this.cutsceneArt = new Image();
+		this.cutsceneArt.src = "assets/cutscene/mountain-water.png";
+
+		// create cutscene textframe with html. and make it have a gray translucent background
+		this.textFrame = document.createElement("div");
+		this.textFrame.innerHTML = `
             <br>
             <br>
             <br>
@@ -34,31 +35,37 @@ export default class Cutscene3 {
             <br>
             <br>
             <p>Click to return...</p>
-        `
-        this.textFrame.style.backgroundColor = "rgba(0, 0, 0, 0.7)"
-        this.textFrame.style.zIndex = "1"
-        this.textFrame.style.position = "absolute"
-        this.textFrame.style.top = "0"
-        this.textFrame.style.left = "0"
-        this.textFrame.style.width = "100%"
-        this.textFrame.style.height = "100%"
-        this.textFrame.style.textAlign = "center"
-        this.textFrame.style.fontSize = "30px"
-        this.textFrame.style.color = "white"
-        this.textFrame.style.fontFamily = "sans-serif"
-        this.gameContainer.appendChild(this.textFrame)
+        `;
+		this.textFrame.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+		this.textFrame.style.zIndex = "1";
+		this.textFrame.style.position = "absolute";
+		this.textFrame.style.top = "0";
+		this.textFrame.style.left = "0";
+		this.textFrame.style.width = "100%";
+		this.textFrame.style.height = "100%";
+		this.textFrame.style.textAlign = "center";
+		this.textFrame.style.fontSize = "30px";
+		this.textFrame.style.color = "white";
+		this.textFrame.style.fontFamily = "sans-serif";
+		this.gameContainer.appendChild(this.textFrame);
 
-        // change audio
-        this.audio.src = "music/xDeviruchi - The Final of The Fantasy.wav"
-    }
+		// change audio
+		this.audio.src = "music/xDeviruchi - The Final of The Fantasy.wav";
+	}
 
-    init() {
-        this.cutsceneArt.onload = () => {
-            this.context.drawImage(this.cutsceneArt, 0, 0, this.canvas.width, this.canvas.height)
-        }
-        this.textFrame.addEventListener("click", () => {
-            this.gameContainer.removeChild(this.textFrame)
-            this.overworld.changeScreen(StartScreen)
-        })
-    }
+	init() {
+		this.cutsceneArt.onload = () => {
+			this.context.drawImage(
+				this.cutsceneArt,
+				0,
+				0,
+				this.canvas.width,
+				this.canvas.height
+			);
+		};
+		this.textFrame.addEventListener("click", () => {
+			this.gameContainer.removeChild(this.textFrame);
+			this.overworld.changeScreen(StartScreen);
+		});
+	}
 }

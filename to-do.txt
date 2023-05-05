@@ -1,40 +1,20 @@
-put pseudocode everywhere
-put console logs everywhere
+attack sprite animations
+    find files
+    try using the gifs instead of animating each frame
+        use a gif library to put onto the canvases?
+when you die, make a restart button, make a restart button that takes you back to the start screen
+fix the text lag bug
+simplify code from start to finish so i understand how to change the code and where are the change points accessible to me
 ////////////////////////////////////////////////////////////////
-instructions in the readme
-make the buttons spammer proof
-match the button art and fonts with the game art and music and character assets
-make a start button appear over the canvas
-    make it console.log(clicked)
-watch the tutorial series from that one guy
-
-make a figma asset of the battle screen
-
-find assets for the combat scenes
-    landscapes
-fantasy mountain
-
-use ashipwright art as the basis of my storytelling and map design
-
-remember to credit authors of art and music
-    the 8-bit audio
-    art
-
 use the colors of the icons as pokemon typing. red, blue, green, normal. tic tac toe
 with red, green, blue, normal attacks
-
-put pauses between the start buttons and continue buttons
-    so that the music has time to fade in and out, and the screen can fade to black
-        make this an overworld function
-
-aim for a short, smooth experience
-    my speedrun x 3 is the cushion speed. aim for 10-15 minutes of gameplay
+put pauses between the start buttons and continue buttons. so that the music has time to fade in and out, and the screen can fade to black. make this an overworld function
+aim for a short, smooth experience. my speedrun x 3 is the cushion speed. aim for 10-15 minutes of gameplay
 quantize readme, exported from milanote
 figure out the story after i get the battle done
 change the background color eventually
 make the battle scene have the battle music
-make sure to fade in and out visually and sonicly. play different music for each part of the game
-    follow what music is available to me as a sonic guide
+make sure to fade in and out visually and sonicly. play different music for each part of the game. follow what music is available to me as a sonic guide
 make the mute button flash red until the first time the player hits it
 get some sound effects with each combat move
 make sure theres like 10 minutes of content
@@ -52,7 +32,6 @@ make a resolved with slicing a spritesheet
 play the music and toggle the mute button when they click the game container
 make the mountain fight scene against the dragon, so it makes sense
 make the mute button more obvious, bigger?
-try using the gifs instead of animating each frame
 link the mute button to 'm' key press
 the enemies need moves too
 go back to the drawing board of milanote, and get to the bottom of my todolist ideas in vscode
@@ -62,6 +41,8 @@ Make a volume scale for mythic mountain
 make enemies randomly choose their moves
 add the fight animations
 follow and send the scorecard
-make sure instructions are finished
-    make it so that the audio.play() is linked to the look of the mute button
+make sure instructions are finished. make it so that the audio.play() is linked to the look of the mute button
 add animations if I have time
+use ashipwright art as the basis of my storytelling and map design
+remember to credit authors of art and music. the 8-bit audio
+////////////////////////////////////////////////////////////////

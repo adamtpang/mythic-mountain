@@ -1,0 +1,67 @@
+.player-name,
+.enemy-name {
+	font-size: 30px;
+	font-family: sans-serif;
+	font-weight: bold;
+	position: absolute;
+	top: 10px;
+	color: black;
+	z-index: 1;
+}
+
+.player-name {
+	left: 10px;
+}
+
+.enemy-name {
+	right: 10px;
+}
+
+.dialogue {
+	color: white;
+	font-size: 20px;
+	font-family: sans-serif;
+	font-weight: bold;
+	position: absolute;
+	top: 30px;
+	left: 300px;
+	z-index: 1;
+}
+
+.player-hp-border,
+.enemy-hp-border {
+	background-color: black;
+	width: 260px;
+	height: 20px;
+	position: absolute;
+	top: 10px;
+	z-index: 1;
+	border: 4px solid black;
+}
+
+.player-hp-border {
+	left: 10px;
+}
+
+.enemy-hp-border {
+	right: 10px;
+}
+
+.player-hp,
+.enemy-hp {
+	background-color: darkred;
+	width: 260px;
+	height: 20px;
+	position: absolute;
+	top: 10px;
+	z-index: 1;
+	border: 4px solid black;
+}
+
+.player-hp {
+	left: 10px;
+}
+
+.enemy-hp {
+	right: 10px;
+}

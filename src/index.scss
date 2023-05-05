@@ -1,139 +1,152 @@
+// meta
+
 body {
-    background: rgb(1,4,11,255); // setting the background color to the same as the start screen art
-    overflow: hidden;
+	background: rgb(
+		1,
+		4,
+		11,
+		255
+	); // setting the background color to the same as the start screen art
+	overflow: hidden;
 }
+
+// game
 
 .game-container {
-    position: relative;
-    width: 1147px;
-    height: 800px;
-    margin: 0 auto;
-    top: 50;
-    cursor: url("../assets/overworld/cursor1.png"), auto;
-}
-
-.game-container .game-canvas {
-    position: absolute;
-    // left: 50%;
-    // top: 50%;
-    // transform: translate(-50%, -50%);
-}
-
-.player-canvas {
-    position: relative;
-}
-
-.enemy-canvas {
-    position: relative;
+	width: 1147px;
+	height: 800px;
+	margin: 0 auto;
+	cursor: url("../assets/overworld/cursor1.png"), auto;
+	position: relative;
 }
 
 .game-container img {
-    position: absolute;
-    left: 42%;
-    top: 80%;
-    background-clip: padding-box;
-    border-radius: 15px;
+	border-radius: 15px;
+	left: 42%;
+	top: 80%;
+	position: absolute;
+	background-clip: padding-box;
 }
 
-#mute-button {
-    border: none;
-    background-color: transparent;
+.game-container .game-canvas {
+	position: absolute;
 }
 
-#mute-button img {
-    width: 40px;
-    height: 40px;
+.player-canvas {
+	position: relative;
 }
 
-.menu {
-    display: none;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    width: 1147px;
-    height: 120px;
-    margin: 0 auto;
-    cursor: url("../assets/overworld/cursor1.png"), auto;
+.enemy-canvas {
+	position: relative;
 }
 
-.mini-menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    width: 287;
-    height: 120px;
-    margin: 0 auto;
-}
-
-#fight-button {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 35px;
-    width: 287px;
-    background-color: salmon;
-    border: 10px solid gold;
-}
-
-.fight-choice {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    width: 50%;
-    font-size: 20px;
-    display: none;
-}
-
-.fight-choice button {
-    border: none;
-    width: 144px;
-    height: 60px;
-}
-
-.github-button {
-    position: relative;
-    top: 0;
-    right: 0;
-}
-
-.linkedin-button {
-    position: relative;
-    top: 0;
-    right: 0;
-}
-
-.github-button img {
-    position: relative;
-    top: 0;
-    left: 0;
-    border: none;
-    background-color: transparent;
-    width: 50px;
-    height: 50px;
-}
-
-.linkedin-button img {
-    position: relative;
-    top: 0;
-    left: 0;
-    border: none;
-    background-color: transparent;
-    width: 50px;
-    height: 50px;
-}
+// nav and link buttons
 
 .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    width: 1147px;
-    height: 120px;
-    margin: 0 auto;
+	width: 1147px;
+	height: 120px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: relative;
 }
 
 #link-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 120px;
-    position: relative;
-    transform: translateY(25%);
+	width: 120px;
+	transform: translateY(25%);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: relative;
 }
+
+.github-button {
+	top: 0;
+	right: 0;
+	position: relative;
+}
+
+.linkedin-button {
+	top: 0;
+	right: 0;
+	position: relative;
+}
+
+.github-button img {
+	top: 0;
+	left: 0;
+	width: 50px;
+	height: 50px;
+	position: relative;
+	border: none;
+	background-color: transparent;
+}
+
+.linkedin-button img {
+	top: 0;
+	left: 0;
+	width: 50px;
+	height: 50px;
+	position: relative;
+	border: none;
+	background-color: transparent;
+}
+
+#mute-button {
+	border: none;
+	background-color: transparent;
+}
+
+#mute-button img {
+	width: 40px;
+	height: 40px;
+}
+
+// fight menu things
+
+.menu {
+	width: 1147px;
+	height: 120px;
+	margin: 0 auto;
+	cursor: url("../assets/overworld/cursor1.png"), auto;
+	display: none;
+	flex-direction: row;
+	justify-content: space-between;
+	position: relative;
+}
+
+.mini-menu {
+	width: 287;
+	height: 120px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: relative;
+}
+
+#fight-button {
+	font-size: 35px;
+	width: 287px;
+	border: 10px solid gold;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+	background-color: salmon;
+}
+
+.fight-choice {
+	width: 50%;
+	font-size: 13px;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+	display: none;
+}
+
+.fight-choice button {
+	width: 144px;
+	height: 60px;
+	border: none;
+}
+
+// imports
+
+@import './styles/battleHUD';
