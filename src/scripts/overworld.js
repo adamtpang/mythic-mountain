@@ -2,10 +2,10 @@ import StartScreen from "./start-screen";
 import Cutscene1 from "./cutscene1";
 import Battle1 from "./battle1";
 import Cutscene2 from "./cutscene2";
-import Battle2 from "./battle3";
+import Battle2 from "./battle2";
 import Cutscene3 from "./cutscene3";
-// import Battle3 from "./battleScreen3";
-// import Cutscene4 from "./cutscene4";
+import Battle3 from "./battle3";
+import Cutscene4 from "./cutscene4";
 
 export default class Overworld {
 	constructor(config) {
@@ -20,16 +20,26 @@ export default class Overworld {
 		// gets the context of the canvas
 		this.context = this.canvas.getContext("2d");
 		this.context.imageSmoothingEnabled = false;
-		this.currentScreen = null;
-
+		
 		// create audio
 		this.audio = new Audio();
 		this.audio.loop = true;
 		this.audio.muted = true;
 		this.audio.volume = 0.4;
-
+		
 		// find menu
 		this.menu = document.querySelector(".menu");
+
+		// set the current screen to the start screen
+		// CHANGE HERE //
+		// this.currentScreen = new StartScreen(this);
+		// this.currentScreen = new Cutscene1(this);
+		// this.currentScreen = new Battle1(this);
+		// this.currentScreen = new Cutscene2(this);
+		this.currentScreen = new Battle2(this);
+		// this.currentScreen = new Cutscene3(this);
+		// this.currentScreen = new Battle3(this);
+		// this.currentScreen = new Cutscene4(this);
 	}
 
 	init() {
@@ -46,7 +56,6 @@ export default class Overworld {
 					"<img src='assets/overworld/unmute_icon.png' alt='unmuted'></img>";
 			}
 		});
-		this.currentScreen = new Cutscene2(this);
 		this.currentScreen.init();
 	}
 

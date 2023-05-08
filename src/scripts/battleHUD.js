@@ -1,38 +1,117 @@
+// should handle all the visual elements of the battle on the HUD
 export default class BattleHUD {
-	constructor(unit) {
-		this.unit = unit;
-		this.initializeElements();
-		this.setHUD();
+	constructor(battle) {
+		this.battle = battle;
+		this.player = battle.player;
+		this.enemy = battle.enemy;
+		this.rendered = false;
 	}
 
-	initializeElements() {
-		const team = this.unit.team;
-		this.nameText = document.querySelector(`.${team}-name`);
-		this.hpSlider = document.querySelector(`.${team}-hp`);
-		this.width = parseFloat(getComputedStyle(this.hpSlider).width);
-		this.MaxHPSliderWidth = this.hpSlider.style.width;
-		this.CurrentHPSliderWidth = this.width * this.unit.currentPercentage;
+	init() {
+		this.render();
+	}
 
-		if (team === "player") {
-			this.moves = this.unit.moves
+	// helper function
+	createElement(tag, options = {}) {
+		const element = document.createElement(tag);
+		Object.entries(options).forEach(
+			([key, value]) => (element[key] = value)
+		);
+		return element;
+	}
+
+	// render all the HUD
+	render() {
+		const menu = document.querySelector(".HUD");
+		const playerHUD = this.createTeamHUD("player");
+		const dialogueBox = this.createDialogueBox();
+		const miniMenu = this.createMiniMenu();
+		const enemyHUD = this.createTeamHUD("enemy");
+
+		menu.append(playerHUD, dialogueBox, miniMenu, enemyHUD);
+		this.rendered = true;
+
+		this.updateUnitHUD(this.player);
+		this.updateUnitHUD(this.enemy);
+	}
+
+	// create the HUD for each unit
+	createTeamHUD(team) {
+		const HUD = this.createElement("div", { id: `${team}-hud` });
+		HUD.append(
+			this.createElement("img", { src: "assets/menu/hud.png" }),
+			this.createElement("p", { className: `${team}-name` }),
+			this.createElement("div", { className: `${team}-hp` }) // put text into this div with innerText = hp
+		);
+		return HUD;
+	}
+
+	// properly set/update the correct values for each unit
+	updateUnitHUD(unit) {
+		const nameText = document.querySelector(`.${unit.team}-name`);
+		const hpSlider = document.querySelector(`.${unit.team}-hp`);
+
+		nameText.innerText = unit.name;
+		hpSlider.style.width = `${
+			(unit.currentHP / unit.maxHP) * hpSlider.offsetWidth
+		}px`;
+
+		if (unit.team === "player") {
+			unit.moves.forEach((move, index) => {
+				const button = document.getElementById(`fight${index + 1}`);
+				button.innerHTML = `${move.name} |${move.damage}, ${move.accuracy}%|`;
+			});
 		}
 	}
 
-	setHUD() {
-		this.nameText.innerText = this.unit.name;
-		this.hpSlider.style.width = `${this.CurrentHPSliderWidth}px`;
+	createDialogueBox() {
+		const dialogueBox = this.createElement("div", {
+			className: "dialogue",
+		});
 
-		if (this.unit.team === "player") {
-			// set choice buttons to have their proper names
-            this.moves.forEach((move, index) => {
-                const button = document.getElementById(`fight${index + 1}`);
-                button.innerHTML = `${move.name} |${move.damage}, ${move.accuracy}%|`;
-            });
-		}
+		const text = this.createElement("p", {
+			id: "dialogue-text",
+			innerText: "Choose a move!",
+		});
+		const image = this.createElement("img", {
+			id: "dialogue-img",
+			src: "assets/menu/basic container.png",
+		});
+		dialogueBox.append(text, image);
+		return dialogueBox;
 	}
 
-	setHP(HPPercentage) {
-		const newWidth = HPPercentage <= 0 ? 0 : this.width * HPPercentage;
-		this.hpSlider.style.width = `${newWidth}px`;
+	createMiniMenu() {
+		const miniMenu = this.createElement("div", { className: "mini-menu" });
+		const fightButton = this.createElement("button", {
+			id: "fight-button",
+			innerText: "Fight",
+		});
+		miniMenu.appendChild(fightButton);
+		this.createFightChoices(miniMenu, fightButton);
+		return miniMenu;
+	}
+
+	createFightChoices(miniMenu, fightButton) {
+		for (let i = 1; i <= 4; i++) {
+			const choice = this.createElement("button", {
+				id: `fight${i}`,
+				className: "fight-choice",
+			});
+			miniMenu.appendChild(choice);
+			choice.style.display = "none";
+
+			choice.addEventListener("click", () =>
+				this.battle.chooseMove(choice)
+			);
+		}
+
+		fightButton.addEventListener("click", () => {
+			fightButton.style.display = "none";
+			miniMenu.style.flexWrap = "wrap";
+			miniMenu
+				.querySelectorAll(".fight-choice")
+				.forEach((choice) => (choice.style.display = "block"));
+		});
 	}
 }

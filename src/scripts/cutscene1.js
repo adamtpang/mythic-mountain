@@ -18,7 +18,7 @@ export default class Cutscene1 {
             <br>
             <br>
             <br>
-            <p>Your name is Astalor.</p>
+            <p>Your name is Frank.</p>
             <p>You find yourself on a quest to North Mountain.</p>
             <p>In the distance, you see a cave embedded on the mountain's side.</p>
             <p>It's the cave of the dragon Robert! He's been terrorizing the land for years.</p>

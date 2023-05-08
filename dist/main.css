@@ -95,19 +95,19 @@ body {
   height: 40px;
 }
 
-.menu {
+.HUD {
   width: 1147px;
   height: 120px;
   margin: 0 auto;
   cursor: url("../assets/overworld/cursor1.png"), auto;
-  display: none;
+  display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   position: relative;
 }
 
 .mini-menu {
-  width: 287;
+  width: 25%;
   height: 120px;
   margin: 0 auto;
   display: flex;
@@ -161,10 +161,19 @@ body {
   font-size: 20px;
   font-family: sans-serif;
   font-weight: bold;
-  position: absolute;
-  top: 30px;
-  left: 300px;
+  position: relative;
   z-index: 1;
+}
+
+#dialogue-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+#dialogue-img {
+  z-index: -1;
 }
 
 .player-hp-border,

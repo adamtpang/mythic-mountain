@@ -1,6 +1,6 @@
-import BattleScreen2 from "./battle3";
+import Battle2 from "./battle2";
 
-import { Astalor } from "./characters";
+import { Frank } from "./characters";
 
 export default class Cutscene2 {
 	constructor(overworld) {
@@ -21,7 +21,7 @@ export default class Cutscene2 {
 
 		// create cutscene art
 		this.cutsceneArt = new Image();
-		this.cutsceneArt.src = "assets/cave-art/blue-cave.png";
+		this.cutsceneArt.src = "assets/background-art/blue-cave.png";
 
 		// create cutscene textframe with html. and make it have a gray translucent background
         this.textFrame = document.createElement("div");
@@ -74,15 +74,15 @@ export default class Cutscene2 {
 		this.textFrame.appendChild(this.healthButton);
 
 		this.attackButton.addEventListener("click", () => {
-			Astalor.receiveAttackUpgrade(10);
+			Frank.receiveAttackUpgrade(10);
             this.gameContainer.removeChild(this.textFrame);
-			this.overworld.changeScreen(BattleScreen2);
+			this.overworld.changeScreen(Battle2);
 		});
 
 		this.healthButton.addEventListener("click", () => {
-			Astalor.receiveHealthUpgrade(30);
+			Frank.receiveHealthUpgrade(30);
             this.gameContainer.removeChild(this.textFrame);
-			this.overworld.changeScreen(BattleScreen2);
+			this.overworld.changeScreen(Battle2);
 		});
 	}
 

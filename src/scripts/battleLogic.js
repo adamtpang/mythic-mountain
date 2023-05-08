@@ -1,183 +1,72 @@
 import BattleHUD from "./battleHUD.js";
-import Cutscene2 from "./cutscene2.js";
-import Cutscene3 from "./cutscene3.js";
-import StartScreen from "./start-screen.js";
 
+// should only pertain to pure battle logic
+// having a standardized lingo for the battle logic will make it easier to understand
 export default class BattleLogic {
-	constructor(overworld, playerCanvas, enemyCanvas, player, enemy) {
+	constructor(player, enemy) {
 		this.player = player;
 		this.enemy = enemy;
-		this.playerCanvas = playerCanvas;
-		this.enemyCanvas = enemyCanvas;
-		this.overworld = overworld;
-		this.playerHUD = new BattleHUD(this.player); // player HUD
-		this.enemyHUD = new BattleHUD(this.enemy); // enemy HUD
-		this.dialogue = document.getElementsByClassName("dialogue")[0];
-		this.dialogue.style.left = "320px";
-		this.dialogue.style.fontSize = "16px";
-		this.battleState = "Start"; // states = "Start", "PlayerTurn", "EnemyTurn", "PlayerWin", "EnemyWin"
-		this.dialogueDelay = 2000;
-
-		this.fightButton = document.getElementById("fight-button");
-		this.choice1 = document.getElementById("fight1");
-		this.choice2 = document.getElementById("fight2");
-		this.choice3 = document.getElementById("fight3");
-		this.choice4 = document.getElementById("fight4");
-
-		this.fightChoices = [
-			this.choice1,
-			this.choice2,
-			this.choice3,
-			this.choice4,
-		];
+		this.battleState = "Start";
+		this.dialogueDelay = 1000;
 	}
 
 	init() {
-		// battle initiation
-		this.playerHUD.setHUD(); // sets the HUD
-		this.enemyHUD.setHUD(); // sets the HUD
-		this.dialogue.innerText = `A wild ${this.enemy.name} appeared!`;
+		// console.log(this.player, this.enemy)
+		this.battleHUD = new BattleHUD(this);
+		this.battleHUD.init();
+		this.initializeElements();
 	}
 
-	// player chooses
+	initializeElements() {
+		this.fightChoices = document.querySelectorAll(".fight-choice");
+		this.dialogue = document.getElementById("dialogue-text");
+	}
+
 	onFightButton() {
-		// fight button
 		this.playerTurn();
 	}
 
-	disableButtons() {
-		this.choice1.disabled = true;
-		this.choice2.disabled = true;
-		this.choice3.disabled = true;
-		this.choice4.disabled = true;
-	}
-
-	enableButtons() {
-		this.choice1.disabled = false;
-		this.choice2.disabled = false;
-		this.choice3.disabled = false;
-		this.choice4.disabled = false;
-	}
-
-	onFight(choice) {
-		this.disableButtons();
-		if (this.battleState !== "PlayerTurn") return;
-
-		if (choice === this.choice1) {
-			this.dialogue.innerText = `${this.player.name} used ${this.player.move1.name}!`;
-			setTimeout(() => {
-				this.playerAttack(
-					this.player.move1.damage,
-					this.player.move1.accuracy
-				);
-			}, this.dialogueDelay);
-		} else if (choice === this.choice2) {
-			this.dialogue.innerText = `${this.player.name} used ${this.player.move2.name}!`;
-			setTimeout(() => {
-				this.playerAttack(
-					this.player.move2.damage,
-					this.player.move2.accuracy
-				);
-			}, this.dialogueDelay);
-		} else if (choice === this.choice3) {
-			this.dialogue.innerText = `${this.player.name} used ${this.player.move3.name}!`;
-			setTimeout(() => {
-				this.playerAttack(
-					this.player.move3.damage,
-					this.player.move3.accuracy
-				);
-			}, this.dialogueDelay);
-		} else if (choice === this.choice4) {
-			this.dialogue.innerText = `${this.player.name} used ${this.player.move4.name}!`;
-			setTimeout(() => {
-				this.playerHeal(this.player.move4.healing);
-			}, this.dialogueDelay);
-		}
-	}
-
-	// its dialogue setting, then action
-
 	playerTurn() {
-		// player turn
 		this.enableButtons();
 		this.battleState = "PlayerTurn";
 		this.dialogue.innerText = "Choose a move!";
 	}
 
 	enemyTurn() {
-		// enemy turn
 		this.battleState = "EnemyTurn";
 		this.dialogue.innerText = `${this.enemy.name} is thinking...`;
 	}
 
-	playerAttack(damage, accuracy) {
-		// player attacks
-		if (Math.random() * 100 > accuracy) {
-			// if the move misses
-			this.battleState = "EnemyTurn";
-			this.dialogue.innerText = "The attack missed!";
-			setTimeout(() => {
-				this.enemyTurn();
-				this.enemyChoosesMove();
-			}, this.dialogueDelay);
-			return;
-		} else {
-			// if the move hits
-			let isDead = this.enemy.takeDamage(damage); // enemy takes damage
-			this.enemyHUD.setHP(this.enemy.currentHP / this.enemy.maxHP); // updates enemy HP
-			if (isDead) {
-				// if enemy is dead
-				this.battleState = "PlayerWin";
-				this.dialogue.innerText = `${this.enemy.name} fainted!`;
-				setTimeout(() => {
-					this.endBattle();
-				}, this.dialogueDelay);
-				return;
-			} else {
-				// if enemy is not dead
-				this.battleState = "EnemyTurn";
-				this.dialogue.innerText = `${this.enemy.name} is hurt!`;
-				setTimeout(() => {
-					this.enemyTurn();
-					this.enemyChoosesMove();
-				}, this.dialogueDelay);
-			}
-		}
+	disableButtons() {
+		this.fightChoices.forEach((choice) => (choice.disabled = true));
 	}
 
-	enemyAttack(damage, accuracy) {
-		// enemy attacks
-		if (Math.random() * 100 > accuracy) {
-			// if the move misses
-			this.battleState = "PlayerTurn";
-			this.dialogue.innerText = "The attack missed!";
-			setTimeout(() => {
-				this.playerTurn();
-			}, this.dialogueDelay);
-			return;
-		} else {
-			// if the move hits
-			let isDead = this.player.takeDamage(damage); // player takes damage
-			this.playerHUD.setHP(this.player.currentHP / this.player.maxHP); // updates player HP
-			if (isDead) {
-				this.battleState = "EnemyWin";
-				this.dialogue.innerText = `${this.player.name} fainted!`;
-				setTimeout(() => {
-					this.endBattle();
-				}, this.dialogueDelay);
-				return;
+	enableButtons() {
+		this.fightChoices.forEach((choice) => (choice.disabled = false));
+	}
+
+	chooseMove(choice) {
+		this.disableButtons();
+		const playerMove = this.player.moves[choice.id.slice(-1) - 1];
+		this.dialogue.innerText = `${this.player.name} used ${playerMove.name}!`;
+
+		console.log("playerMove", playerMove);
+
+		setTimeout(() => {
+			if (playerMove.isHeal) {
+				this.heal(this.player, playerMove.value);
 			} else {
-				this.battleState = "PlayerTurn";
-				this.dialogue.innerText = `${this.player.name} is hurt!`;
-				setTimeout(() => {
-					this.playerTurn();
-				}, this.dialogueDelay);
+				this.attack(
+					this.player,
+					this.enemy,
+					playerMove.value,
+					playerMove.accuracy
+				);
 			}
-		}
+		}, this.dialogueDelay);
 	}
 
 	enemyChoosesMove() {
-		// enemy chooses move
 		let enemyMoves = [
 			this.enemy.move1,
 			this.enemy.move2,
@@ -186,50 +75,78 @@ export default class BattleLogic {
 		];
 		let randomMove =
 			enemyMoves[Math.floor(Math.random() * enemyMoves.length)];
-		if (randomMove === this.enemy.move4) {
-			// if the move is heal
-			this.dialogue.innerText = `${this.enemy.name} used ${randomMove.name}!`;
-			setTimeout(() => {
-				this.enemyHeal(randomMove.healing);
-			}, this.dialogueDelay);
-		} else {
-			// if the move is attack
-			this.dialogue.innerText = `${this.enemy.name} used ${randomMove.name}!`;
-			setTimeout(() => {
-				this.enemyAttack(randomMove.damage, randomMove.accuracy);
-			}, this.dialogueDelay);
-		}
-	}
 
-	playerHeal(healing) {
-		// player heals
-		this.player.heal(healing);
-		this.playerHUD.setHP(this.player.currentHP / this.player.maxHP);
-		this.battleState = "EnemyTurn";
-		this.dialogue.innerText = `${this.player.name} is healed!`;
+		this.dialogue.innerText = `${this.enemy.name} used ${randomMove.name}!`;
+
+		console.log("randomMove", randomMove);
+
 		setTimeout(() => {
-			this.enemyTurn();
-			this.enemyChoosesMove();
+			if (randomMove.isHeal) {
+				this.enemy.heal(randomMove.value);
+			} else {
+				this.attack(
+					this.enemy,
+					this.player,
+					randomMove.value,
+					randomMove.accuracy
+				);
+			}
 		}, this.dialogueDelay);
 	}
 
-	enemyHeal(healing) {
-		// enemy heals
-		this.enemy.heal(healing);
-		this.enemyHUD.setHP(this.enemy.currentHP / this.enemy.maxHP);
-		this.battleState = "PlayerTurn";
-		this.dialogue.innerText = `${this.enemy.name} is healed!`;
+	attack(attacker, defender, value, accuracy) {
+		if (Math.random() * 100 > accuracy) {
+			this.dialogue.innerText = "The attack missed!";
+			this.battleState =
+				attacker === this.player ? "EnemyTurn" : "PlayerTurn";
+			setTimeout(() => {
+				attacker === this.player ? this.enemyTurn() : this.playerTurn();
+				if (attacker === this.player) {
+					this.enemyChoosesMove();
+				}
+			}, this.dialogueDelay);
+		} else {
+			let isDead = defender.takeDamage(value);
+			this.battleHUD.updateUnitHUD(defender);
+			if (isDead) {
+				this.battleState =
+					attacker === this.player ? "PlayerWin" : "EnemyWin";
+				this.dialogue.innerText = `${defender.name} fainted!`;
+				setTimeout(() => {
+					this.endBattle();
+				}, this.dialogueDelay);
+			} else {
+				this.battleState =
+					attacker === this.player ? "EnemyTurn" : "PlayerTurn";
+				this.dialogue.innerText = `${defender.name} is hurt!`;
+				setTimeout(() => {
+					if (attacker === this.player) {
+						this.enemyTurn();
+						this.enemyChoosesMove();
+					} else {
+						this.playerTurn();
+					}
+				}, this.dialogueDelay);
+			}
+		}
+	}
+
+	heal(player, value) {
+		player.heal(value);
+		this.battleHUD.updateUnitHUD(player);
+		this.dialogue.innerText = `${player.name} is healed!`;
+		this.battleState = player === this.player ? "EnemyTurn" : "PlayerTurn";
 		setTimeout(() => {
-			this.playerTurn();
+			player === this.player ? this.enemyTurn() : this.playerTurn();
+			if (player === this.enemy) {
+				this.enemyChoosesMove();
+			}
 		}, this.dialogueDelay);
 	}
 
 	endBattle() {
-		// ends the battle
 		if (this.battleState === "PlayerWin") {
-			// if player wins
 			this.dialogue.innerText = "You won!";
-
 			setTimeout(() => {
 				this.enableButtons();
 				this.playerCanvas.style.display = "none";
@@ -240,11 +157,9 @@ export default class BattleLogic {
 					this.overworld.changeScreen(Cutscene3);
 				}
 			}, this.dialogueDelay);
-
 		} else if (this.battleState === "EnemyWin") {
-			// if enemy wins
 			this.dialogue.innerText = "You lost!";
-            this.overworld.changeScreen(StartScreen);
+			this.overworld.changeScreen(StartScreen);
 		}
 	}
 }

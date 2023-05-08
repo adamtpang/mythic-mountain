@@ -1,3 +1,45 @@
+.HUD {
+	width: 1147px;
+	height: 120px;
+	margin: 0 auto;
+	cursor: url("../assets/overworld/cursor1.png"), auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	position: relative;
+}
+
+.mini-menu {
+	width: 25%;
+	height: 120px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: relative;
+}
+
+#fight-button {
+	font-size: 35px;
+	width: 287px;
+	border: 10px solid gold;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+	background-color: salmon;
+}
+
+.fight-choice {
+	width: 50%;
+	font-size: 13px;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+	display: none;
+}
+
+.fight-choice button {
+	width: 144px;
+	height: 60px;
+	border: none;
+}
+
 .player-name,
 .enemy-name {
 	font-size: 30px;
@@ -22,10 +64,19 @@
 	font-size: 20px;
 	font-family: sans-serif;
 	font-weight: bold;
-	position: absolute;
-	top: 30px;
-	left: 300px;
+	position: relative;
 	z-index: 1;
+}
+
+#dialogue-text {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 1;
+}
+
+#dialogue-img {
+	z-index: -1;
 }
 
 .player-hp-border,

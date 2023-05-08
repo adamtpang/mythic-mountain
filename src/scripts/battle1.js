@@ -1,7 +1,7 @@
 import Battle from "./battleLogic.js";
-import { Astalor, Draymond } from "./characters.js";
+import { Frank, Draymond } from "./characters.js";
 
-export default class BattleScreen1 {
+export default class Battle1 {
 	constructor(overworld) {
 		this.gameContainer = overworld.element;
 		this.canvas = overworld.canvas;
@@ -10,7 +10,7 @@ export default class BattleScreen1 {
 
 		// create battle screen art
 		this.battleScreenArt = new Image();
-		this.battleScreenArt.src = "assets/battle-screen-art/twilight-pond.png";
+		this.battleScreenArt.src = "assets/background-art/twilight-pond.png";
 
 		// change audio
 		this.audio.src = "music/xDeviruchi - And The Journey Begins .wav";
@@ -45,7 +45,7 @@ export default class BattleScreen1 {
 		this.fireknightFrames = [];
 		for (let i = 1; i <= 8; i++) {
 			const fireknightImage = new Image();
-			fireknightImage.src = `assets/battle-screen-art/fireknight/idle_${i}.png`;
+			fireknightImage.src = `assets/battle-art/fireknight/idle_${i}.png`;
 			this.fireknightFrames.push(fireknightImage);
 		}
 
@@ -53,7 +53,7 @@ export default class BattleScreen1 {
 
 		// create slime
 		this.slime = new Image();
-		this.slime.src = "assets/battle-screen-art/slime/slime_idle.png";
+		this.slime.src = "assets/battle-art/slime/slime_idle.png";
 		this.enemyFrame = 0;
 
 		// find menu
@@ -71,57 +71,15 @@ export default class BattleScreen1 {
 			this.fightChoices[i] = document.querySelector(`#fight${i}`);
 		}
 
-		// start
-
-		function createElementWithClass(tag, className, parent) {
-			const element = document.createElement(tag);
-			element.classList.add(className);
-			parent.appendChild(element);
-			return element;
-		}
-
-		this.playerName = createElementWithClass("p", "player-name", this.menu);
-		this.playerName.innerText = "playername";
-
-		this.enemyName = createElementWithClass("p", "enemy-name", this.menu);
-		this.enemyName.innerText = "enemyname";
-
-		this.dialogue = createElementWithClass("p", "dialogue", this.menu);
-		this.dialogue.innerText = "Insert Dialogue...";
-
-		this.playerHealthBarBorder = createElementWithClass(
-			"div",
-			"player-hp-border",
-			this.menu
-		);
-		this.enemyHealthBarBorder = createElementWithClass(
-			"div",
-			"enemy-hp-border",
-			this.menu
-		);
-
-		this.playerHealthBar = createElementWithClass(
-			"div",
-			"player-hp",
-			this.menu
-		);
-		this.enemyHealthBar = createElementWithClass(
-			"div",
-			"enemy-hp",
-			this.menu
-		);
-
-		// stop
-
-        let player = Astalor;
-        let enemy = Draymond;
+		let player = Frank;
+		let enemy = Draymond;
 
 		this.battle = new Battle(
 			overworld,
 			this.playerCanvas,
 			this.enemyCanvas,
 			player,
-            enemy,
+			enemy
 		);
 		this.battle.init();
 	}
@@ -133,7 +91,7 @@ export default class BattleScreen1 {
 			this.fightButton.style.display = "none";
 			this.miniMenu.style.flexWrap = "wrap";
 
-            // for every choice, display it and add an event listener
+			// for every choice, display it and add an event listener
 			this.fightChoices.forEach((choice) => {
 				choice.style.display = "block";
 				choice.addEventListener("click", () => {
@@ -144,7 +102,7 @@ export default class BattleScreen1 {
 
 		this.menu.style.display = "flex";
 		this.battleScreenArt.onload = () => {
-			this.audio.play();
+			// this.audio.play();
 			this.context.drawImage(
 				this.battleScreenArt,
 				0,
