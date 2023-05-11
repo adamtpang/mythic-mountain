@@ -16,7 +16,7 @@ body {
 	width: 1147px;
 	height: 800px;
 	margin: 0 auto;
-	cursor: url("../assets/overworld/cursor1.png"), auto;
+	cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
 	position: relative;
 }
 
@@ -98,11 +98,22 @@ body {
 	background-color: transparent;
 }
 
-#mute-button img {
+#mute-button i {
+	font-size: 40px;
 	width: 40px;
 	height: 40px;
 }
 
+@keyframes flashing {
+	0%,
+	100% {
+		color: white;
+	}
+	50% {
+		color: black;
+	}
+}
+
 // imports
 
-@import './styles/battleHUD';
+@import "./styles/battleHUD";

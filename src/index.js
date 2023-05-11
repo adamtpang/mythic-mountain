@@ -1,8 +1,8 @@
-import Overworld from "./scripts/overworld.js";
+import Puppeteer from "./scripts/puppeteer.js";
 
 window.onload = function () {
-	const overworld = new Overworld({
+	const puppeteer = new Puppeteer({
 		element: document.querySelector(".game-container"),
 	});
-	overworld.init();
+	puppeteer.init();
 };

@@ -1,68 +1,83 @@
-import StartScreen from "./start-screen";
-import Cutscene1 from "./cutscene1";
-import Battle1 from "./battle1";
-import Cutscene2 from "./cutscene2";
-import Battle2 from "./battle2";
-import Cutscene3 from "./cutscene3";
-import Battle3 from "./battle3";
-import Cutscene4 from "./cutscene4";
+import {
+	StartScreen,
+	Cutscene1,
+	Cutscene2,
+	Cutscene3,
+	Cutscene4,
+} from "./scenes";
+import { Battle1, Battle2, Battle3 } from "./battles";
 
-export default class Overworld {
+export default class Puppeteer {
 	constructor(config) {
-		// takes the config from the init on the index.js file
-		// the game container div
 		this.element = config.element;
-		// finds the canvas within the game container
 		this.canvas = this.element.querySelector(".game-canvas");
-		// sets the canvas width and height to the game container width and height
 		this.canvas.width = this.element.offsetWidth;
 		this.canvas.height = this.element.offsetHeight;
-		// gets the context of the canvas
 		this.context = this.canvas.getContext("2d");
 		this.context.imageSmoothingEnabled = false;
-		
+
 		// create audio
 		this.audio = new Audio();
 		this.audio.loop = true;
 		this.audio.muted = true;
-		this.audio.volume = 0.4;
-		
+		this.audio.volume = 0.1;
+
 		// find menu
 		this.menu = document.querySelector(".menu");
 
-		// set the current screen to the start screen
 		// CHANGE HERE //
 		// this.currentScreen = new StartScreen(this);
 		// this.currentScreen = new Cutscene1(this);
-		// this.currentScreen = new Battle1(this);
+		this.currentScreen = new Battle1(this);
 		// this.currentScreen = new Cutscene2(this);
-		this.currentScreen = new Battle2(this);
+		// this.currentScreen = new Battle2(this);
 		// this.currentScreen = new Cutscene3(this);
 		// this.currentScreen = new Battle3(this);
 		// this.currentScreen = new Cutscene4(this);
+
+		// this.sceneSequence = [
+		// 	StartScreen,
+		// 	Cutscene1,
+		// 	Battle1,
+		// 	Cutscene2,
+		// 	Battle2,
+		// 	Cutscene3,
+		// 	Battle3,
+		// 	Cutscene4,
+		// ];
 	}
 
 	init() {
 		// setting up the mute button and making it clickable
 		const button = document.getElementById("mute-button");
+		this.applyFlashingEffect(button);
+
 		button.addEventListener("click", () => {
 			this.audio.muted = !this.audio.muted;
+			const icon = button.querySelector("i");
 			if (this.audio.muted) {
-				button.innerHTML =
-					"<img src='assets/overworld/mute_icon.png' alt='muted'></img>";
+				icon.classList.remove("fa-volume-up");
+				icon.classList.add("fa-volume-mute");
 			} else {
 				this.audio.play();
-				button.innerHTML =
-					"<img src='assets/overworld/unmute_icon.png' alt='unmuted'></img>";
+				icon.classList.remove("fa-volume-mute");
+				icon.classList.add("fa-volume-up");
+				icon.style.animation = "none"; // Remove flashing effect from the icon
+				icon.style.color = "white"; // Set the color of the icon to white
 			}
 		});
+
 		this.currentScreen.init();
+	}
+
+	applyFlashingEffect(element) {
+		const icon = element.querySelector("i");
+		icon.style.animation = "flashing 1s infinite";
 	}
 
 	changeScreen(screen) {
 		this.currentScreen = new screen(this);
-		// this.currentScreen.audio.muted = false;
-		// this.currentScreen.audio.play();
+		this.currentScreen.audio.play();
 		this.currentScreen.init();
 	}
 }

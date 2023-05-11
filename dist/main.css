@@ -10,7 +10,7 @@ body {
   width: 1147px;
   height: 800px;
   margin: 0 auto;
-  cursor: url("../assets/overworld/cursor1.png"), auto;
+  cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
   position: relative;
 }
 
@@ -90,16 +90,26 @@ body {
   background-color: transparent;
 }
 
-#mute-button img {
+#mute-button i {
+  font-size: 40px;
   width: 40px;
   height: 40px;
 }
 
+@keyframes flashing {
+  0%, 100% {
+    color: white;
+  }
+  50% {
+    color: black;
+  }
+}
 .HUD {
   width: 1147px;
   height: 120px;
   margin: 0 auto;
-  cursor: url("../assets/overworld/cursor1.png"), auto;
+  border: 3px solid rgb(240, 157, 255);
+  cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -119,14 +129,15 @@ body {
 #fight-button {
   font-size: 35px;
   width: 287px;
+  color: black;
   border: 10px solid gold;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  background-color: salmon;
+  background-color: rgb(255, 255, 255);
 }
 
 .fight-choice {
   width: 50%;
-  font-size: 13px;
+  font-size: 20px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   display: none;
 }
@@ -197,7 +208,7 @@ body {
 
 .player-hp,
 .enemy-hp {
-  background-color: darkred;
+  background-color: greenyellow;
   width: 260px;
   height: 20px;
   position: absolute;
@@ -212,4 +223,22 @@ body {
 
 .enemy-hp {
   right: 10px;
+}
+
+.player-hp-num {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  z-index: 1;
+  font-size: 37px;
+  font-family: sans-serif;
+}
+
+.enemy-hp-num {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  z-index: 1;
+  font-size: 37px;
+  font-family: sans-serif;
 }
