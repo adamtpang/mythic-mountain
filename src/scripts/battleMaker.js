@@ -185,7 +185,7 @@ export default class BattleMaker {
 	// move the character's canvas back and forth to "animate" an attack
 	animateAttack = (team) => {
 		const canvas = team === "player" ? this.playerCanvas : this.enemyCanvas;
-		const deltaX = team === "player" ? 50 : -50;
+		const deltaX = team === "player" ? 70 : -70;
 		const originalX = canvas.style.left || "0px";
 		const currentX = parseInt(originalX, 10);
 

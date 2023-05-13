@@ -98,7 +98,8 @@ export default class Puppeteer {
 	goBackToStartScreen() {
 		this.currentSceneIndex = 0;
 		this.currentScreen.destroy();
-		this.currentScreen = new StartScreen(this);
+		this.currentSceneIndex = 0;
+		this.currentScreen = new this.sceneSequence[this.currentSceneIndex]
 		this.currentScreen.init();
 		this.currentScreen.audio.play();
 	}
