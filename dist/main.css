@@ -1,0 +1,316 @@
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+body {
+  background: rgb(1, 4, 11);
+  overflow: hidden;
+}
+
+.game-container {
+  width: 1147px;
+  height: 800px;
+  margin: 0 auto;
+  cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
+  position: relative;
+}
+
+.game-container .game-canvas {
+  position: absolute;
+}
+
+.player-canvas {
+  position: relative;
+}
+
+.enemy-canvas {
+  position: relative;
+}
+
+.navbar {
+  width: 1147px;
+  height: 120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+#link-buttons {
+  width: 120px;
+  transform: translateY(25%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+.github-button {
+  top: 0;
+  right: 0;
+  position: relative;
+}
+
+.linkedin-button {
+  top: 0;
+  right: 0;
+  position: relative;
+}
+
+.github-button img {
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border: none;
+  background-color: transparent;
+}
+
+.linkedin-button img {
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border: none;
+  background-color: transparent;
+}
+
+#mute-button {
+  border: none;
+  background-color: transparent;
+}
+
+#mute-button i {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+@keyframes flashing {
+  0%, 100% {
+    color: white;
+  }
+  50% {
+    color: black;
+  }
+}
+.text-frame {
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+  position: absolute;
+  top: 80%;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 15%;
+  height: 100%;
+}
+
+.inner-text {
+  width: 60%;
+  height: 40%;
+  margin-left: 20px;
+}
+
+.upgrade-container {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.attack-upgrade,
+.vitality-upgrade {
+  width: 90%;
+  height: 30%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.blink {
+  animation: blink 1s linear infinite;
+}
+
+.start-button {
+  background-image: url("../assets/UI-art/Start Button.png");
+  cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 280px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative;
+  top: 80%;
+  left: 38%;
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 20px;
+}
+
+.HUD {
+  width: 1147px;
+  height: 120px;
+  margin: 0 auto;
+  border: 3px solid rgb(74, 152, 255);
+  cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
+  display: none;
+  flex-direction: row;
+  justify-content: space-around;
+  position: relative;
+}
+
+.mini-menu {
+  width: 25%;
+  height: 120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+#fight-button {
+  font-size: 35px;
+  width: 287px;
+  color: black;
+  border: 10px solid gold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+.fight-choice {
+  width: 50%;
+  font-size: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  display: none;
+  color: rgb(9, 9, 9);
+}
+
+.fight-choice button {
+  width: 144px;
+  height: 60px;
+  border: none;
+  color: rgb(255, 255, 255);
+}
+
+.player-name,
+.enemy-name {
+  font-size: 30px;
+  font-family: sans-serif;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  color: black;
+  z-index: 1;
+}
+
+.player-name {
+  left: 10px;
+}
+
+.enemy-name {
+  right: 10px;
+}
+
+.dialogue {
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+#dialogue-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+#dialogue-img {
+  z-index: -1;
+}
+
+.player-hp-border,
+.enemy-hp-border {
+  background-color: black;
+  width: 260px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  z-index: 1;
+  border: 4px solid black;
+}
+
+.player-hp-border {
+  left: 10px;
+}
+
+.enemy-hp-border {
+  right: 10px;
+}
+
+.player-hp,
+.enemy-hp {
+  background-color: greenyellow;
+  width: 260px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  z-index: 1;
+  border: 4px solid black;
+}
+
+.player-hp {
+  left: 10px;
+}
+
+.enemy-hp {
+  right: 10px;
+}
+
+.player-hp-num {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  z-index: 1;
+  font-size: 37px;
+  font-family: sans-serif;
+}
+
+.enemy-hp-num {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  z-index: 1;
+  font-size: 37px;
+  font-family: sans-serif;
+}
