@@ -25,6 +25,7 @@ export default class Puppeteer {
 		// find menu
 		this.menu = document.querySelector(".menu");
 
+		// testing testing 123 456
 		this.sceneSequence = [
 			StartScreen,
 			Cutscene1,
