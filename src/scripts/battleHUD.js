@@ -155,7 +155,7 @@ export default class BattleHUD {
 			const tooltip = this.createElement("div", {
 				className: "tooltip",
 				innerText: "",
-				style: "display: none; position: absolute; bottom: 100%;",
+				style: "display: none; position: absolute; bottom: 100%; color: white",
 			});
 
 			choice.appendChild(tooltip);
