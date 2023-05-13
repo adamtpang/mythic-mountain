@@ -1,7 +1,6 @@
 // handle the raw game logic
 
 import BattleHUD from "./battleHUD.js";
-
 // should only pertain to pure battle logic
 // having a standardized lingo for the battle logic will make it easier to understand
 export default class BattleLogic {
@@ -64,14 +63,14 @@ export default class BattleLogic {
 						this.player,
 						this.enemy,
 						move,
-						this.battleMaker.animateAttack.bind(this.player)
+						this.battleMaker.animateAttack
 					);
 				} else {
 					this.attack(
 						this.enemy,
 						this.player,
 						move,
-						this.battleMaker.animateAttack.bind(this.enemy)
+						this.battleMaker.animateAttack
 					);
 				}
 			}
@@ -109,7 +108,7 @@ export default class BattleLogic {
 		this.makeMove(this.enemy, randomMove);
 	}
 
-	attack(attacker, defender, move, animationFunction) {
+	attack(attacker, defender, move, animateFunction) {
 		// if the attack misses
 		if (Math.random() * 100 > move.accuracy) {
 			this.dialogue.innerText = "The attack missed!";
@@ -124,8 +123,8 @@ export default class BattleLogic {
 			return;
 		} else {
 			// if the attack hits
-			animationFunction();
-			defender.takeDamage(move.value);
+			animateFunction(attacker.team);
+			defender.takeDamage(Math.floor(move.value));
 			let isDead = defender.isDead();
 			this.battleHUD.updateCharacterHUD(defender);
 			if (isDead) {
@@ -154,7 +153,7 @@ export default class BattleLogic {
 	}
 
 	heal(character, value) {
-		character.takeHealing(value);
+		character.takeHealing(Math.floor(value));
 		this.battleHUD.updateCharacterHUD(character);
 		this.dialogue.innerText = `${character.name} is healed!`;
 		this.battleState =
@@ -165,10 +164,19 @@ export default class BattleLogic {
 	}
 
 	endBattle() {
+		const timeToWait = 3000;
 		if (this.battleState === "PlayerWin") {
 			this.dialogue.innerText = "You won!";
+			setTimeout(() => {
+				this.battleMaker.puppeteer.playNextScene();
+			}, timeToWait);
+			// clear the interval
 		} else if (this.battleState === "EnemyWin") {
 			this.dialogue.innerText = "You lost!";
+			setTimeout(() => {
+				this.battleMaker.puppeteer.goBackToStartScreen();
+			}, timeToWait);
+			// clear the interval
 		}
 		this.disableButtons(); // Add this line to disable buttons when the battle ends
 	}

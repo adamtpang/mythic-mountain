@@ -20,31 +20,25 @@ export default class Puppeteer {
 		this.audio = new Audio();
 		this.audio.loop = true;
 		this.audio.muted = true;
-		this.audio.volume = 0.1;
+		this.audio.volume = 0.5;
 
 		// find menu
 		this.menu = document.querySelector(".menu");
 
-		// CHANGE HERE //
-		// this.currentScreen = new StartScreen(this);
-		// this.currentScreen = new Cutscene1(this);
-		this.currentScreen = new Battle1(this);
-		// this.currentScreen = new Cutscene2(this);
-		// this.currentScreen = new Battle2(this);
-		// this.currentScreen = new Cutscene3(this);
-		// this.currentScreen = new Battle3(this);
-		// this.currentScreen = new Cutscene4(this);
-
-		// this.sceneSequence = [
-		// 	StartScreen,
-		// 	Cutscene1,
-		// 	Battle1,
-		// 	Cutscene2,
-		// 	Battle2,
-		// 	Cutscene3,
-		// 	Battle3,
-		// 	Cutscene4,
-		// ];
+		this.sceneSequence = [
+			// StartScreen,
+			// Cutscene1,
+			Battle1,
+			Cutscene2,
+			Battle2,
+			Cutscene3,
+			Battle3,
+			Cutscene4,
+		];
+		this.currentSceneIndex = 0;
+		this.currentScreen = new this.sceneSequence[this.currentSceneIndex](
+			this
+		);
 	}
 
 	init() {
@@ -75,9 +69,36 @@ export default class Puppeteer {
 		icon.style.animation = "flashing 1s infinite";
 	}
 
-	changeScreen(screen) {
-		this.currentScreen = new screen(this);
+	changeScreen(newScreen) {
+		this.currentScreen.destroy();
+		this.currentScreen = new newScreen(this);
 		this.currentScreen.audio.play();
 		this.currentScreen.init();
+	}
+
+	playNextScene() {
+		// console.log("playNextScene")
+		// console.log(this.audio.src)
+
+		this.currentSceneIndex++;
+		const nextScene =
+			this.sceneSequence[
+				this.currentSceneIndex % this.sceneSequence.length
+			];
+
+		this.currentScreen.destroy(); // destroy the current screen
+		this.currentScreen = new nextScene(this); // reassign the current screen
+		// play the audio and next scene
+		// this.currentScene.audio.src
+		this.currentScreen.init();
+		this.currentScreen.audio.play();
+	}
+
+	goBackToStartScreen() {
+		this.currentSceneIndex = 0;
+		this.currentScreen.destroy();
+		this.currentScreen = new StartScreen(this);
+		this.currentScreen.init();
+		this.currentScreen.audio.play();
 	}
 }

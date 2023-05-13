@@ -3,9 +3,9 @@
 	height: 120px;
 	margin: 0 auto;
 	// make a rainbow border
-	border: 3px solid rgb(240, 157, 255);
+	border: 3px solid rgb(74, 152, 255);
 	cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
-	display: flex;
+	display: none;
 	flex-direction: row;
 	justify-content: space-around;
 	position: relative;
@@ -35,12 +35,14 @@
 	font-size: 20px;
 	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 	display: none;
+	color: rgb(9, 9, 9);
 }
 
 .fight-choice button {
 	width: 144px;
 	height: 60px;
 	border: none;
+	color: rgb(255, 255, 255);
 }
 
 .player-name,
@@ -122,7 +124,7 @@
 
 .player-hp-num {
 	position: absolute;
-	top: 30px;
+	top: 40px;
 	left: 10px;
 	z-index: 1;
 	font-size: 37px;
@@ -131,7 +133,7 @@
 
 .enemy-hp-num {
 	position: absolute;
-	top: 30px;
+	top: 40px;
 	right: 10px;
 	z-index: 1;
 	font-size: 37px;

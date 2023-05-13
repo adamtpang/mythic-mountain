@@ -17,33 +17,21 @@ export default class Character {
 		this.move4 = this.moves[3];
 		this.move4.isHeal = true;
 
-		// spritesheet
-		this.spriteSheet = canvasVariables.spriteSheet;
-
-		// drawing 6
-		this.srcX = canvasVariables.srcX;
-		this.srcY = canvasVariables.srcY;
-		this.srcWidth = canvasVariables.srcWidth;
-		this.srcHeight = canvasVariables.srcHeight;
-		this.destX = canvasVariables.destX;
-		this.destY = canvasVariables.destY;
-
-		// specialties
-		this.width = canvasVariables.width;
-		this.frameCount = canvasVariables.frameCount;
-		this.slowDown = canvasVariables.slowDown;
-		this.scaling = canvasVariables.scaling;
+		this.canvasVariables = canvasVariables;
 	}
 
-	receiveAttackUpgrade(amount) {
+	receiveAttackUpgrade() {
+		const amount = 5;
 		this.moves.forEach((move) => {
 			move.value += amount;
 		});
 	}
 
-	receiveHealthUpgrade(amount) {
+	receiveVitalityUpgrade() {
+		const amount = 20;
 		this.maxHP += amount;
 		this.currentHP += amount;
+		this.move4.value += amount / 2;
 	}
 
 	takeDamage(damage) {

@@ -1,10 +1,10 @@
 import BattleLogic from "./battleLogic.js";
 
 export default class BattleMaker {
-	constructor(puppeteer, backgroundSrc, audioSrc, player, enemy) {
+	constructor(puppeteer, sceneArt, sceneMusic, player, enemy) {
 		this.puppeteer = puppeteer;
-		this.backgroundSrc = backgroundSrc;
-		this.audioSrc = audioSrc;
+		this.sceneArt = sceneArt;
+		this.sceneMusic = sceneMusic;
 		this.player = player;
 		this.enemy = enemy;
 
@@ -13,14 +13,10 @@ export default class BattleMaker {
 		this.context = this.puppeteer.context;
 		this.audio = this.puppeteer.audio;
 
-		// Create battle screen art
 		this.battleScreenArt = new Image();
-		this.battleScreenArt.src = this.backgroundSrc;
+		this.battleScreenArt.src = this.sceneArt;
+		this.audio.src = this.sceneMusic;
 
-		// Change audio
-		this.audio.src = this.audioSrc;
-
-		// Function to create and configure canvas and context
 		function createCanvasAndContext(container, className) {
 			const canvas = document.createElement("canvas");
 			canvas.classList.add(className);
@@ -29,33 +25,37 @@ export default class BattleMaker {
 			const context = canvas.getContext("2d");
 			context.imageSmoothingEnabled = false;
 
+			canvas.style.position = "relative";
+
 			container.appendChild(canvas);
 
 			return { canvas, context };
 		}
 
-		// Create sprite canvases and contexts
 		const { canvas: playerCanvas, context: playerContext } =
 			createCanvasAndContext(this.gameContainer, "player-canvas");
 		const { canvas: enemyCanvas, context: enemyContext } =
 			createCanvasAndContext(this.gameContainer, "enemy-canvas");
 
-		// Set the created canvases and contexts to the class properties
 		this.playerCanvas = playerCanvas;
 		this.playerContext = playerContext;
 		this.enemyCanvas = enemyCanvas;
 		this.enemyContext = enemyContext;
+
+		this.playerCanvasVariables = this.player.canvasVariables;
+		this.enemyCanvasVariables = this.enemy.canvasVariables;
+
+		this.playerImages = [];
+		this.enemyImages = [];
+
+		this.playerframeCount = 0;
+		this.enemyframeCount = 0;
 	}
 
 	init() {
-		// start the battle
 		this.battle = new BattleLogic(this, this.player, this.enemy).init();
-
-		// make the menu visible
 		this.menu = document.querySelector(".HUD");
 		this.menu.style.display = "flex";
-
-		// when the art loads, draw the art on it
 		this.battleScreenArt.onload = () => {
 			this.context.drawImage(
 				this.battleScreenArt,
@@ -64,22 +64,64 @@ export default class BattleMaker {
 				this.canvas.width,
 				this.canvas.height
 			);
+			this.playerImages = this.sliceSpriteSheet(
+				this.playerCanvasVariables
+			);
+			this.enemyImages = this.sliceSpriteSheet(this.enemyCanvasVariables);
 			this.animateCombatants();
 		};
 	}
 
-	// take in an image and draw it on the proper canvas
-	drawCharacter(character) {
-		let canvas, context;
-		if (character.team === "player") {
-			canvas = this.playerCanvas;
-			context = this.playerContext;
-		} else {
-			canvas = this.enemyCanvas;
-			context = this.enemyContext;
+	sliceSpriteSheet(canvasVariables) {
+		const {
+			spriteSheet,
+			srcX,
+			srcY,
+			destX,
+			destY,
+			width,
+			height,
+			frameCount,
+			scaling,
+		} = canvasVariables;
+
+		const characterImages = [];
+
+		for (let i = 0; i < frameCount; i++) {
+			const frameSrcX = srcX + i * width;
+			characterImages.push({
+				spriteSheet,
+				srcX: frameSrcX,
+				srcY,
+				srcWidth: width,
+				srcHeight: height,
+				destX: destX,
+				destY: destY,
+				destWidth: width * scaling,
+				destHeight: height * scaling,
+			});
 		}
 
-		let image,
+		return characterImages;
+	}
+
+	drawCharacter(team, context, canvas) {
+		let frame;
+
+		if (team === "player") {
+			frame =
+				this.playerImages[
+					this.playerframeCount % this.playerImages.length
+				];
+		} else if (team === "enemy") {
+			frame =
+				this.enemyImages[
+					this.enemyframeCount % this.enemyImages.length
+				];
+		}
+
+		let {
+			spriteSheet,
 			srcX,
 			srcY,
 			srcWidth,
@@ -88,32 +130,20 @@ export default class BattleMaker {
 			destY,
 			destWidth,
 			destHeight,
-			width,
-			frameCount,
-			slowDown,
-			scaling;
+		} = frame;
 
-		image = character.spriteSheet;
-		width = character.width;
-		frameCount = character.frameCount || 0;
-		slowDown = character.slowDown || 1;
-		scaling = character.scaling || 1;
+		// if (destX > canvas.width) {
+		// 	destX = canvas.width;
+		// }
 
-		srcX = Math.floor(frameCount / slowDown) * width;
-		srcY = character.srcY;
-
-		srcWidth = character.srcWidth;
-		srcHeight = character.srcHeight;
-		destX = character.destX;
-		destY = character.destY;
-
-		destWidth = canvas.width * scaling;
-		destHeight = canvas.height * scaling;
+		// if (destY > canvas.height) {
+		// 	destY = canvas.height;
+		// }
 
 		// Clear and draw the image on the canvas
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		context.drawImage(
-			image,
+			spriteSheet,
 			srcX,
 			srcY,
 			srcWidth,
@@ -125,31 +155,52 @@ export default class BattleMaker {
 		);
 	}
 
-	// cycle through a character's spritesheet and call "drawCharacter" to draw the character on the canvas
 	animateCombatants() {
+		const milliseconds = 800;
+		// Calculate the frame duration for each sprite
+		const playerFrameSpeed = milliseconds / this.playerImages.length;
+		const enemyFrameSpeed = milliseconds / this.enemyImages.length;
+
+		// Animate the player
 		setInterval(() => {
-			console.log("animating")
+			this.drawCharacter(
+				this.player.team,
+				this.playerContext,
+				this.playerCanvas
+			);
+			this.playerframeCount++;
+		}, playerFrameSpeed);
 
-			this.drawCharacter(this.player);
-			this.playerFrame++;
-
-			this.drawCharacter(this.enemy);
-			this.enemyFrame++;
-		}, 100);
+		// Animate the enemy
+		setInterval(() => {
+			this.drawCharacter(
+				this.enemy.team,
+				this.enemyContext,
+				this.enemyCanvas
+			);
+			this.enemyframeCount++;
+		}, enemyFrameSpeed);
 	}
 
-	animateAttack(character) {
-		let canvas;
-		if (character.team === "player") {
-			canvas = this.playerCanvas;
-		} else if (character.team === "enemy") {
-			canvas = this.enemyCanvas;
-		}
+	// move the character's canvas back and forth to "animate" an attack
+	animateAttack = (team) => {
+		const canvas = team === "player" ? this.playerCanvas : this.enemyCanvas;
+		const deltaX = team === "player" ? 50 : -50;
 		const originalX = canvas.style.left || "0px";
 		const currentX = parseInt(originalX, 10);
-		canvas.style.left = `${currentX + character.deltaX}px`;
+
+		canvas.style.left = `${currentX + deltaX}px`;
 		setTimeout(() => {
 			canvas.style.left = originalX;
 		}, 300);
+	};
+
+	// remove all the elements that this file made from the DOM
+	destroy() {
+		const menu = document.querySelector(".HUD");
+		menu.remove();
+
+		this.gameContainer.removeChild(this.playerCanvas);
+		this.gameContainer.removeChild(this.enemyCanvas);
 	}
 }

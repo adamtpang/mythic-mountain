@@ -1,17 +1,10 @@
 import Character from "./character.js";
 
-// base stats
-const health = 30;
-const firstAttack = health * 0.2;
-const secondAttack = firstAttack * 2;
-const thirdAttack = firstAttack * 3;
-const heal = secondAttack;
-
 // URLs
-const fireknightURL = "assets/character-art/fireknight/fireknight_idle.png";
-const slimeURL = "assets/character-art/slime/slime_idle.png";
-const beholderURL = "assets/character-art/beholder/beholder_idle.png";
-const dragonURL = "assets/character-art/dragon/dragon_idle.png";
+const fireknightURL = "assets/character-art/fireknight_idle.png";
+const slimeURL = "assets/character-art/slime_idle.png";
+const beholderURL = "assets/character-art/beholder_idle.png";
+const dragonURL = "assets/character-art/dragon_idle.png";
 
 // making the image instances
 const fireKnightSpriteSheet = new Image();
@@ -25,10 +18,15 @@ slimeSpriteSheet.src = slimeURL;
 beholderSpriteSheet.src = beholderURL;
 dragonSpriteSheet.src = dragonURL;
 
+// enable cheats:
 // setting enemey stat multipliers
-const slimeMultiplier = 0.25;
+const slimeMultiplier = .75;
 const beholderMultiplier = 1;
-const dragonMultiplier = 1.5;
+const dragonMultiplier = 2.5;
+
+// const slimeMultiplier = .1;
+// const beholderMultiplier = .1;
+// const dragonMultiplier = .1;
 
 // names
 const frankName = "Frank";
@@ -36,11 +34,18 @@ const draymondName = "Draymond";
 const hectorName = "Hector";
 const robertName = "Robert";
 
+// base stats
+const health = 40;
+const firstAttack = Math.ceil(health * 0.1);
+const secondAttack = Math.ceil(firstAttack * 1.5);
+const thirdAttack = Math.ceil(firstAttack * 2);
+const heal = Math.ceil(secondAttack);
+
 // health
 const frankHealth = health;
-const draymondHealth = health * slimeMultiplier;
-const hectorHealth = health * beholderMultiplier;
-const robertHealth = health * dragonMultiplier;
+const draymondHealth = Math.ceil(health * slimeMultiplier);
+const hectorHealth = Math.ceil(health * beholderMultiplier);
+const robertHealth = Math.ceil(health * dragonMultiplier);
 
 // teams
 const frankTeam = "player";
@@ -51,84 +56,112 @@ const robertTeam = "enemy";
 // moves
 const frankMoves = [
 	{ "Paper Cut": [firstAttack, 100] },
-	{ "Classic Slash": [secondAttack, 75] },
-	{ "Fire Slash": [thirdAttack, 50] },
+	{ "Classic Slash": [secondAttack, 80] },
+	{ "Fire Slash": [thirdAttack, 60] },
 	{ "Drink Potion": [heal, 100] },
 ];
 const draymondMoves = [
 	{ Tackle: [firstAttack * slimeMultiplier, 100] },
-	{ "Shoot Goop": [secondAttack * slimeMultiplier, 75] },
-	{ "Gravity Slam": [thirdAttack * slimeMultiplier, 50] },
+	{ "Shoot Goop": [secondAttack * slimeMultiplier, 80] },
+	{ "Gravity Slam": [thirdAttack * slimeMultiplier, 60] },
 	{ "Drink Goop": [heal * slimeMultiplier, 100] },
 ];
 const hectorMoves = [
 	{ "Sharp Gaze": [firstAttack * beholderMultiplier, 100] },
-	{ "Wing Strike": [secondAttack * beholderMultiplier, 75] },
-	{ "Sink Fangs": [thirdAttack * beholderMultiplier, 50] },
+	{ "Wing Strike": [secondAttack * beholderMultiplier, 80] },
+	{ "Sink Fangs": [thirdAttack * beholderMultiplier, 60] },
 	{ "Chew Bugs": [heal * beholderMultiplier, 100] },
 ];
 const robertMoves = [
 	{ "Wing Gusto": [firstAttack * dragonMultiplier, 100] },
-	{ "Jagged Tail": [secondAttack * dragonMultiplier, 50] },
-	{ "Supernova Spit": [thirdAttack * dragonMultiplier, 25] },
+	{ "Jagged Tail": [secondAttack * dragonMultiplier, 80] },
+	{ "Supernova Spit": [thirdAttack * dragonMultiplier, 60] },
 	{ "Drink the Sun": [heal * dragonMultiplier, 100] },
 ];
 
 // canvas variables
 const frankCanvasVariables = {
 	spriteSheet: fireKnightSpriteSheet,
-	srcX: 30,
-	srcY: 62,
-	srcWidth: 1000,
-	srcHeight: 1000,
-	destX: 100,
-	destY: 250,
-	width: 50,
+	// where to start
+	srcX: 0,
+	srcY: 0,
+
+	// where to draw
+	destX: 50,
+	destY: 350,
+
+	// how big is each slice?
+	width: 64,
+	height: 64,
+
+	// how manyy slices there are:
 	frameCount: 8,
-	slowDown: 3,
-	scaling: 10,
+
+	// how to scale the image
+	scaling: 7,
 };
 
 const draymondCanvasVariables = {
 	spriteSheet: slimeSpriteSheet,
+	// where to start
 	srcX: 0,
 	srcY: 0,
-	srcWidth: 1000,
-	srcHeight: 1000,
+
+	// where to draw
 	destX: 200,
-	destY: 470,
+	destY: 200,
+
+	// how big is each slice?
 	width: 64,
+	height: 64,
+
+	// how manyy slices there are:
 	frameCount: 5,
-	slowDown: 3,
-	scaling: 12,
+
+	// how to scale the image
+	scaling: 9,
 };
 
 const hectorCanvasVariables = {
 	spriteSheet: beholderSpriteSheet,
+	// where to start
 	srcX: 0,
 	srcY: 0,
-	srcWidth: 1000,
-	srcHeight: 1000,
-	destX: 200,
-	destY: 470,
+
+	// where to draw
+	destX: -90,
+	destY: 200,
+
+	// how big is each slice?
 	width: 64,
+	height: 64,
+
+	// how manyy slices there are:
 	frameCount: 5,
-	slowDown: 3,
-	scaling: 12,
+
+	// how to scale the image
+	scaling: 9,
 };
 
 const robertCanvasVariables = {
 	spriteSheet: dragonSpriteSheet,
+	// where to start
 	srcX: 0,
 	srcY: 0,
-	srcWidth: 1000,
-	srcHeight: 1000,
-	destX: 200,
-	destY: 470,
+
+	// where to draw
+	destX: -10,
+	destY: 200,
+
+	// how big is each slice?
 	width: 64,
+	height: 64,
+
+	// how manyy slices there are:
 	frameCount: 5,
-	slowDown: 3,
-	scaling: 12,
+
+	// how to scale the image
+	scaling: 9,
 };
 
 // exporting the characters

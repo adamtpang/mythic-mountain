@@ -9,7 +9,21 @@ export default class BattleHUD {
 	}
 
 	init() {
-		this.render();
+		const hudContainer =
+			document.getElementsByClassName("hud-container")[0];
+		const hud = this.createElement("div", { className: "HUD" });
+		hudContainer.append(hud);
+
+		const playerHUD = this.createTeamHUD("player");
+		const dialogueBox = this.createDialogueBox();
+		const moveMenu = this.createMoveMenu();
+		const enemyHUD = this.createTeamHUD("enemy");
+
+		hud.append(playerHUD, dialogueBox, moveMenu, enemyHUD);
+
+		this.updateCharacterHUD(this.player);
+		this.updateCharacterHUD(this.enemy);
+		this.rendered = true;
 	}
 
 	// helper function
@@ -21,25 +35,11 @@ export default class BattleHUD {
 		return element;
 	}
 
-	// render all the HUD
-	render() {
-		const menu = document.querySelector(".HUD");
-		const playerHUD = this.createTeamHUD("player");
-		const dialogueBox = this.createDialogueBox();
-		const miniMenu = this.createMiniMenu();
-		const enemyHUD = this.createTeamHUD("enemy");
-
-		menu.append(playerHUD, dialogueBox, miniMenu, enemyHUD);
-		this.rendered = true;
-
-		this.updateCharacterHUD(this.player);
-		this.updateCharacterHUD(this.enemy);
-	}
-
 	// create the HUD for each character
 	createTeamHUD(team) {
 		const HUD = this.createElement("div", { id: `${team}-hud` });
-
+		// make the HUD display flex
+		HUD.style.display = "flex";
 		HUD.append(
 			this.createElement("img", {
 				src: `assets/UI-art/${team}-hud.png`,
@@ -71,13 +71,17 @@ export default class BattleHUD {
 			(character.currentHP / character.maxHP) * this.InitialHPWidth;
 		const currentWidth = parseFloat(hpSlider.style.width);
 
+		let frameId = null;
+
 		// Animate HP bar
 		const animateHP = () => {
 			const currentWidth = parseFloat(hpSlider.style.width);
+			const epsilon = 0.01;
 
-			if (Math.abs(currentWidth - targetWidth) < 1) {
+			if (Math.abs(currentWidth - targetWidth) < epsilon) {
 				hpSlider.style.width = targetWidth + "px";
 				hpText.innerText = character.currentHP + " HP";
+				cancelAnimationFrame(frameId); // cancel the animation frame
 			} else {
 				const newWidth =
 					currentWidth + (targetWidth - currentWidth) * 0.1;
@@ -87,11 +91,12 @@ export default class BattleHUD {
 					255 - newRatio * 255
 				}, ${newRatio * 255}, 0)`;
 
-				requestAnimationFrame(animateHP);
+				cancelAnimationFrame(frameId); // cancel the previous frame
+				frameId = requestAnimationFrame(animateHP); // save the frame request id
 			}
 		};
 
-		requestAnimationFrame(animateHP);
+		frameId = requestAnimationFrame(animateHP);
 
 		if (character === this.player) {
 			this.updateAttackButtons();
@@ -100,8 +105,8 @@ export default class BattleHUD {
 
 	// update the moves for the player
 	updateAttackButtons() {
-		const moves = this.player.moves
-		moves.forEach((move, index) => {	
+		const moves = this.player.moves;
+		moves.forEach((move, index) => {
 			move.innerText = this.player.moves[index].name;
 		});
 	}
@@ -123,28 +128,39 @@ export default class BattleHUD {
 		return dialogueBox;
 	}
 
-	createMiniMenu() {
-		const miniMenu = this.createElement("div", { className: "mini-menu" });
+	createMoveMenu() {
+		const moveMenu = this.createElement("div", { className: "mini-menu" });
 		const fightButton = this.createElement("button", {
 			id: "fight-button",
 			innerText: "Fight",
 		});
-		miniMenu.appendChild(fightButton);
-		this.createAttackButtons(miniMenu, fightButton);
-		return miniMenu;
+		moveMenu.appendChild(fightButton);
+		this.createMoveButtons(moveMenu, fightButton);
+		return moveMenu;
 	}
 
-	createAttackButtons(miniMenu, fightButton) {
+	createMoveButtons(moveMenu, fightButton) {
 		// make the fight choices go: light gray, gray, dark gray, light green
 		const colors = ["#D3D3D3", "#A9A9A9", "#696969", "#90EE90"];
+		const moves = this.player.moves;
 		for (let i = 1; i <= 4; i++) {
 			const choice = this.createElement("button", {
 				id: `fight${i}`,
 				className: "fight-choice",
 				style: `background-color: ${colors[i - 1]}`,
+				innerText: moves[i - 1].name,
 			});
 
-			miniMenu.appendChild(choice);
+			// Create a tooltip element
+			const tooltip = this.createElement("div", {
+				className: "tooltip",
+				innerText: "",
+				style: "display: none; position: absolute; bottom: 100%;",
+			});
+
+			choice.appendChild(tooltip);
+
+			moveMenu.appendChild(choice);
 
 			choice.style.display = "none";
 
@@ -152,35 +168,37 @@ export default class BattleHUD {
 				this.battle.playerChoose(choice)
 			);
 
-			// add a hover effect for each choice that shows a modal with the move's damage and accuracy
+			// Add a hover effect for each choice that shows a tooltip with the move's damage and accuracy
 			choice.addEventListener("mouseover", () => {
 				// Get the move information
 				const move = this.player.moves[i - 1];
 
-				let moveInfo;
-				if (move.isHeal) {
-					moveInfo = `Healing: ${move.value}\n Accuracy: ${move.accuracy}`;
-				} else {
-					moveInfo = `Damage: ${move.value}\nAccuracy: ${move.accuracy}`;
+				if (move) {
+					let moveInfo;
+					if (move.isHeal) {
+						moveInfo = `Healing: ${move.value}\n Accuracy: ${move.accuracy}`;
+					} else {
+						moveInfo = `Damage: ${move.value}\nAccuracy: ${move.accuracy}`;
+					}
+
+					// Set the tooltip innerText with the move info
+					tooltip.innerText = moveInfo;
+
+					// Show the tooltip
+					tooltip.style.display = "block";
 				}
-
-				// Save the original innerText
-				choice.originalInnerText = choice.innerText;
-
-				// Replace the innerText with the move info
-				choice.innerText = moveInfo;
 			});
 
 			choice.addEventListener("mouseout", () => {
-				// Restore the original innerText
-				choice.innerText = choice.originalInnerText;
+				// Hide the tooltip
+				tooltip.style.display = "none";
 			});
 		}
 
 		fightButton.addEventListener("click", () => {
 			fightButton.style.display = "none";
-			miniMenu.style.flexWrap = "wrap";
-			miniMenu
+			moveMenu.style.flexWrap = "wrap";
+			moveMenu
 				.querySelectorAll(".fight-choice")
 				.forEach((choice) => (choice.style.display = "block"));
 		});
