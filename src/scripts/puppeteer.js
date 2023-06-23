@@ -41,9 +41,10 @@ export default class Puppeteer {
 	// initialize the current screen
 	init() {
 
+		this.resetGame();
+
 		// setting up the mute button and making it clickable
 		const button = document.getElementById("mute-button");
-
 		const icon = button.querySelector("i");
 		icon.style.animation = "flashing 1s infinite";
 
@@ -52,9 +53,7 @@ export default class Puppeteer {
 			this.audio.muted = !this.audio.muted;
 			const icon = button.querySelector("i");
 			if (this.audio.muted) {
-				setTimeout(() => {
-					this.playMusic();
-				}, 1000);
+				this.playMusic();
 
 				icon.classList.remove("fa-volume-up");
 				icon.classList.add("fa-volume-mute");
@@ -65,7 +64,6 @@ export default class Puppeteer {
 				icon.style.color = "white"; // Set the color of the icon to white
 			}
 		});
-		this.resetGame();
 	}
 
 	playMusic() {
