@@ -63,7 +63,7 @@ export default class SceneMaker {
 
 	init() {
 		this.puppeteer.audio.src = this.sceneMusic;
-		this.puppeteer.playMusic();
+		this.puppeteer.audio.play()
 
 		// create scene art
 		this.sceneArtImage = new Image();

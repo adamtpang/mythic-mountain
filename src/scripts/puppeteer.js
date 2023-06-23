@@ -49,12 +49,12 @@ export default class Puppeteer {
 		icon.style.animation = "flashing 1s infinite";
 
 		button.addEventListener("click", () => {
+			const icon = button.querySelector("i");
+
 			// toggle audio mute
 			this.audio.muted = !this.audio.muted;
-			const icon = button.querySelector("i");
-			if (this.audio.muted) {
-				this.playMusic();
 
+			if (this.audio.muted) {
 				icon.classList.remove("fa-volume-up");
 				icon.classList.add("fa-volume-mute");
 			} else {
@@ -64,13 +64,6 @@ export default class Puppeteer {
 				icon.style.color = "white"; // Set the color of the icon to white
 			}
 		});
-	}
-
-	playMusic() {
-		const puppeteerPlay = this.audio.play();
-		if (puppeteerPlay !== undefined) {
-			puppeteerPlay.then(() => { }).catch((error) => { });
-		}
 	}
 
 	playScreen(newScreen) {
