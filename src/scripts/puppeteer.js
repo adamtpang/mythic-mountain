@@ -52,7 +52,9 @@ export default class Puppeteer {
 			this.audio.muted = !this.audio.muted;
 			const icon = button.querySelector("i");
 			if (this.audio.muted) {
-				this.playMusic();
+				setTimeout(() => {
+					this.playMusic();
+				}, 1000);
 
 				icon.classList.remove("fa-volume-up");
 				icon.classList.add("fa-volume-mute");
@@ -68,7 +70,6 @@ export default class Puppeteer {
 
 	playMusic() {
 		const puppeteerPlay = this.audio.play();
-		console.log(puppeteerPlay)
 		if (puppeteerPlay !== undefined) {
 			puppeteerPlay.then(() => { }).catch((error) => { });
 		}
