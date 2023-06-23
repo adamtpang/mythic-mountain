@@ -24,7 +24,10 @@ export default class SceneMaker {
 		this.startButtonClickHandler = () => {
 			this.gameContainer.removeChild(this.startButton);
 			this.puppeteer.playNextScene();
+
 		};
+
+		// so the conditional creation of the audio object is working, but i need the src to change when a new scene or battle is initialized
 
 		this.textFrameClickHandler = () => {
 			// If the current sentence is being gradually displayed
@@ -62,9 +65,7 @@ export default class SceneMaker {
 	}
 
 	init() {
-		// play the new music
-		this.puppeteer.audio.src = this.sceneMusic;
-		this.puppeteer.audio.play();
+		this.playSceneMusic();
 
 		// create scene art
 		this.sceneArtImage = new Image();
@@ -78,6 +79,17 @@ export default class SceneMaker {
 			this.createStartButton();
 		} else if (this.mode === "scene") {
 			this.createTextFrame();
+		}
+	}
+
+	playSceneMusic() {
+		if (!this.puppeteer.audio) {
+			this.puppeteer.createAudio();
+		}
+		if (this.puppeteer.audio) {
+			this.puppeteer.audio.src = this.sceneMusic;
+			this.puppeteer.audio.load(); // Load the new source
+			this.puppeteer.audio.play(); // Play the audio
 		}
 	}
 

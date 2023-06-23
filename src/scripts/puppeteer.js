@@ -28,45 +28,92 @@ export default class Puppeteer {
 		// find menu
 		this.menu = document.querySelector(".menu");
 
-		// audio
-		this.audio = new Audio();
-		this.audio.muted = true;
-		this.audio.loop = true;
-		this.audio.volume = 0.5;
-		this.audio.currentTime = 0;
-
 		// current screen
 		this.currentScreen = null;
+
+		// mute button handler
+		this.muteButtonHandler = () => {
+			this.buttonClicked = true;
+
+			// if the puppeteer doesnt have audio, make it
+			if (!this.audio) {
+				this.createAudio();
+			}
+
+			// toggle audio mute
+			this.audio.muted = !this.audio.muted;
+
+			// do the conditional
+			if (this.audio.muted) {
+				this.makeMuted();
+			} else {
+				this.makeUnmuted();
+			}
+		};
 	}
 
-	// initialize the current screen
-	init() {
+	makeMuted() {
+		console.log("puppeteer make muted")
+		
+		// setting up the mute button and making it clickable
+		const button = document.getElementById("mute-button");
+		const icon = button.querySelector("i");
+		
+		icon.classList.remove("fa-volume-up");
+		icon.classList.add("fa-volume-mute");
+	}
 
-		this.resetGame();
+	makeUnmuted() {
+		console.log("puppeteer make unmuted")
 
 		// setting up the mute button and making it clickable
 		const button = document.getElementById("mute-button");
 		const icon = button.querySelector("i");
-		icon.style.animation = "flashing 1s infinite";
 
-		button.addEventListener("click", () => {
-
-			// // toggle audio mute
-			this.audio.muted = !this.audio.muted;
-			// find the speaker icon
-			const icon = button.querySelector("i");
-			// do the conditional
-			if (this.audio.muted) {
-				icon.classList.remove("fa-volume-up");
-				icon.classList.add("fa-volume-mute");
-			} else {
-				icon.classList.remove("fa-volume-mute");
-				icon.classList.add("fa-volume-up");
-				icon.style.animation = "none"; // Remove flashing effect from the icon
-				icon.style.color = "white"; // Set the color of the icon to white
-			}
-		});
+		icon.classList.remove("fa-volume-mute");
+		icon.classList.add("fa-volume-up");
+		icon.style.animation = "none"; // Remove flashing effect from the icon
+		icon.style.color = "white"; // Set the color of the icon to white
 	}
+
+	init() {
+		console.log("puppeteer init")
+
+		this.resetGame();
+		const button = document.getElementById("mute-button");
+		const icon = button.querySelector("i");
+		icon.style.animation = "flashing 1s infinite";
+		button.addEventListener("click", this.muteButtonHandler);
+	}
+
+	createAudio() {
+		console.log("puppeteer create audio")
+
+		if (this.buttonClicked) {
+			console.log("puppeteer create audio button clicked")
+
+			// check if audio already exists
+			if (!this.audio) {
+				console.log("puppeteer create audio no audio")
+
+				this.audio = new Audio();
+				this.audio.muted = true;
+				this.audio.loop = true;
+				this.audio.volume = 0.5;
+				this.audio.currentTime = 0;
+				this.audio.src = this.currentScreen.sceneMusic;
+				this.audio.play();
+			} else {
+				console.log("puppeteer create audio audio exists")
+
+				// Stop any audio that is currently playing
+				this.audio.pause();
+				this.audio.currentTime = 0;
+			}
+		}
+	}
+
+	// so when the player clicks the mute button the first time, the audio object should be made. from then on, any scene or battle that comes into play should switch the source of that audio tag and reset the time. the mute button should then only toggle mute
 
 	playScreen(newScreen) {
 		if (this.currentScreen) {

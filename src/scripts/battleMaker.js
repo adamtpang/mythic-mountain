@@ -55,9 +55,7 @@ export default class BattleMaker {
 	}
 
 	init() {
-		// play the new music
-		this.puppeteer.audio.src = this.sceneMusic;
-		this.puppeteer.audio.play();
+		this.playSceneMusic();
 
 		this.battle = new BattleLogic(this, this.player, this.enemy).init();
 		this.menu = document.querySelector(".HUD");
@@ -76,6 +74,18 @@ export default class BattleMaker {
 			this.enemyImages = this.sliceSpriteSheet(this.enemyCanvasVariables);
 			this.animateCombatants();
 		};
+	}
+
+	playSceneMusic() {
+		if (!this.puppeteer.audio) {
+			this.puppeteer.createAudio();
+		}
+
+		if (this.puppeteer.audio) {
+			this.puppeteer.audio.src = this.sceneMusic;
+			this.puppeteer.audio.load(); // Load the new source
+			this.puppeteer.audio.play(); // Play the audio
+		}
 	}
 
 	sliceSpriteSheet(canvasVariables) {
