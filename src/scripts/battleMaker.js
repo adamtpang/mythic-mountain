@@ -55,8 +55,9 @@ export default class BattleMaker {
 	}
 
 	init() {
+		// play the new music
 		this.puppeteer.audio.src = this.sceneMusic;
-		this.puppeteer.audio.play()
+		this.puppeteer.audio.play();
 
 		this.battle = new BattleLogic(this, this.player, this.enemy).init();
 		this.menu = document.querySelector(".HUD");

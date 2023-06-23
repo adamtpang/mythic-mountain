@@ -25,16 +25,17 @@ export default class Puppeteer {
 		this.context = this.canvas.getContext("2d");
 		this.context.imageSmoothingEnabled = false;
 
-		// create audio
-		this.audio = new Audio();
-		this.audio.loop = true;
-		this.audio.muted = true;
-		this.audio.volume = 0.5;
-		this.audio.currentTime = 0;
-
 		// find menu
 		this.menu = document.querySelector(".menu");
 
+		// audio
+		this.audio = new Audio();
+		this.audio.muted = true;
+		this.audio.loop = true;
+		this.audio.volume = 0.5;
+		this.audio.currentTime = 0;
+
+		// current screen
 		this.currentScreen = null;
 	}
 
@@ -49,17 +50,16 @@ export default class Puppeteer {
 		icon.style.animation = "flashing 1s infinite";
 
 		button.addEventListener("click", () => {
-			const icon = button.querySelector("i");
 
 			// // toggle audio mute
 			this.audio.muted = !this.audio.muted;
-
+			// find the speaker icon
+			const icon = button.querySelector("i");
+			// do the conditional
 			if (this.audio.muted) {
-				this.audio.pause()
 				icon.classList.remove("fa-volume-up");
 				icon.classList.add("fa-volume-mute");
 			} else {
-				this.audio.play()
 				icon.classList.remove("fa-volume-mute");
 				icon.classList.add("fa-volume-up");
 				icon.style.animation = "none"; // Remove flashing effect from the icon
