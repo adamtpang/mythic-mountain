@@ -2,7 +2,8 @@
 
 import BattleHUD from "./battleHUD.js";
 // should only pertain to pure battle logic
-// having a standardized lingo for the battle logic will make it easier to understand
+// controls the battleHUD
+
 export default class BattleLogic {
 	constructor(battleMaker, player, enemy) {
 		this.battleMaker = battleMaker;
@@ -13,6 +14,7 @@ export default class BattleLogic {
 		this.dialogueDelay = 1000;
 	}
 
+	// init and destroy
 	init() {
 		// healing the player and enemy to full
 		this.player.healToFull();
@@ -132,7 +134,6 @@ export default class BattleLogic {
 				this.battleState =
 					attacker === this.player ? "PlayerWin" : "EnemyWin";
 				this.dialogue.innerText = `${defender.name} fainted!`;
-				this.battleHUD.updateCharacterHUD(defender);
 				setTimeout(() => {
 					this.endBattle();
 				}, this.dialogueDelay);
@@ -164,18 +165,21 @@ export default class BattleLogic {
 	}
 
 	endBattle() {
-		const timeToWait = 3000;
+		const winTime = 4000;
+		const loseTime = 4000;
 		if (this.battleState === "PlayerWin") {
 			this.dialogue.innerText = "You won!";
 			setTimeout(() => {
 				this.battleMaker.puppeteer.playNextScene();
-			}, timeToWait);
+				this.battleHUD.destroy();
+			}, winTime);
 			// clear the interval
 		} else if (this.battleState === "EnemyWin") {
 			this.dialogue.innerText = "You lost!";
 			setTimeout(() => {
-				this.battleMaker.puppeteer.goBackToStartScreen();
-			}, timeToWait);
+				this.battleMaker.puppeteer.resetGame();
+				this.battleHUD.destroy();
+			}, loseTime);
 			// clear the interval
 		}
 		this.disableButtons(); // Add this line to disable buttons when the battle ends

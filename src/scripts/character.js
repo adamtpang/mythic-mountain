@@ -1,3 +1,5 @@
+// the character class for battle logic
+
 // be the class for every character
 
 export default class Character {
@@ -18,20 +20,47 @@ export default class Character {
 		this.move4.isHeal = true;
 
 		this.canvasVariables = canvasVariables;
+
+		this.attackUpgradeAmount = 5;
+		this.vitalityUpgradeAmount = 20;
+
+		this.attackUpgradesReceived = 0;
+		this.vitalityUpgradesReceived = 0;
 	}
 
 	receiveAttackUpgrade() {
-		const amount = 5;
 		this.moves.forEach((move) => {
-			move.value += amount;
+			move.value += this.attackUpgradeAmount;
 		});
+
+		this.attackUpgradesReceived++;
 	}
 
 	receiveVitalityUpgrade() {
-		const amount = 20;
-		this.maxHP += amount;
-		this.currentHP += amount;
-		this.move4.value += amount / 2;
+		this.maxHP += this.vitalityUpgradeAmount;
+		this.currentHP += this.vitalityUpgradeAmount;
+		this.move4.value += this.vitalityUpgradeAmount / 2;
+
+		this.vitalityUpgradesReceived++;
+	}
+
+	resetUpgrades() {
+		// for every attack upgrade, subtract the upgrade amount from each move's value
+		for (let i = 0; i < this.attackUpgradesReceived; i++) {
+			this.moves.forEach((move) => {
+				move.value -= this.attackUpgradeAmount;
+			});
+		}
+
+		// for every vitality upgrade, subtract the upgrade amount from maxHP and currentHP
+		for (let i = 0; i < this.vitalityUpgradesReceived; i++) {
+			this.maxHP -= this.vitalityUpgradeAmount;
+			this.currentHP -= this.vitalityUpgradeAmount;
+			this.move4.value -= this.vitalityUpgradeAmount / 2;
+		}
+
+		this.attackUpgradesReceived = 0;
+		this.vitalityUpgradesReceived = 0;
 	}
 
 	takeDamage(damage) {

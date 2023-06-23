@@ -1,10 +1,7 @@
-attack sprite animations
-    find files
-    try using the gifs instead of animating each frame
-        use a gif library to put onto the canvases?
-when you die, make a restart button, make a restart button that takes you back to the start screen
-fix the text lag bug
-simplify code from start to finish so i understand how to change the code and where are the change points accessible to me
+
+
+
+
 ////////////////////////////////////////////////////////////////
 use the colors of the icons as pokemon typing. red, blue, green, normal. tic tac toe
 with red, green, blue, normal attacks

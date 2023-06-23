@@ -1,3 +1,7 @@
+// makes each battle visual
+
+// makes a new battle
+
 import BattleLogic from "./battleLogic.js";
 
 export default class BattleMaker {
@@ -11,11 +15,9 @@ export default class BattleMaker {
 		this.gameContainer = this.puppeteer.element;
 		this.canvas = this.puppeteer.canvas;
 		this.context = this.puppeteer.context;
-		this.audio = this.puppeteer.audio;
 
 		this.battleScreenArt = new Image();
 		this.battleScreenArt.src = this.sceneArt;
-		this.audio.src = this.sceneMusic;
 
 		function createCanvasAndContext(container, className) {
 			const canvas = document.createElement("canvas");
@@ -53,6 +55,8 @@ export default class BattleMaker {
 	}
 
 	init() {
+		this.puppeteer.audio.src = this.sceneMusic;
+
 		this.battle = new BattleLogic(this, this.player, this.enemy).init();
 		this.menu = document.querySelector(".HUD");
 		this.menu.style.display = "flex";
@@ -111,12 +115,12 @@ export default class BattleMaker {
 		if (team === "player") {
 			frame =
 				this.playerImages[
-					this.playerframeCount % this.playerImages.length
+				this.playerframeCount % this.playerImages.length
 				];
 		} else if (team === "enemy") {
 			frame =
 				this.enemyImages[
-					this.enemyframeCount % this.enemyImages.length
+				this.enemyframeCount % this.enemyImages.length
 				];
 		}
 
@@ -157,12 +161,10 @@ export default class BattleMaker {
 
 	animateCombatants() {
 		const milliseconds = 800;
-		// Calculate the frame duration for each sprite
 		const playerFrameSpeed = milliseconds / this.playerImages.length;
 		const enemyFrameSpeed = milliseconds / this.enemyImages.length;
 
-		// Animate the player
-		setInterval(() => {
+		this.playerAnimationInterval = setInterval(() => {
 			this.drawCharacter(
 				this.player.team,
 				this.playerContext,
@@ -171,8 +173,7 @@ export default class BattleMaker {
 			this.playerframeCount++;
 		}, playerFrameSpeed);
 
-		// Animate the enemy
-		setInterval(() => {
+		this.enemyAnimationInterval = setInterval(() => {
 			this.drawCharacter(
 				this.enemy.team,
 				this.enemyContext,
@@ -197,10 +198,38 @@ export default class BattleMaker {
 
 	// remove all the elements that this file made from the DOM
 	destroy() {
-		const menu = document.querySelector(".HUD");
-		menu.remove();
+		// Stop animations
+		clearInterval(this.playerAnimationInterval);
+		clearInterval(this.enemyAnimationInterval);
 
-		this.gameContainer.removeChild(this.playerCanvas);
-		this.gameContainer.removeChild(this.enemyCanvas);
+		// Remove menu
+		const menu = document.querySelector(".HUD");
+		if (menu) {
+			menu.style.display = "none";
+		}
+
+		// Remove playerCanvas and enemyCanvas
+		if (this.playerCanvas && this.playerCanvas.parentNode === this.gameContainer) {
+			this.gameContainer.removeChild(this.playerCanvas);
+		}
+		if (this.enemyCanvas && this.enemyCanvas.parentNode === this.gameContainer) {
+			this.gameContainer.removeChild(this.enemyCanvas);
+		}
+
+		// Clear child nodes from gameContainer
+		while (this.gameContainer.firstChild) {
+			if (this.gameContainer.firstChild.nodeName !== 'CANVAS') {
+				this.gameContainer.removeChild(this.gameContainer.firstChild);
+			} else {
+				break;
+			}
+		}
+
+		// Reset properties
+		this.playerCanvas = null;
+		this.enemyCanvas = null;
+		this.menu = null;
+		this.playerAnimationInterval = null;
+		this.enemyAnimationInterval = null;
 	}
 }

@@ -1,3 +1,7 @@
+// makes each scene
+
+// whats the problem? when i try to play the game again, the second time a cutscene is initialized, variables go undefined and the game crashes
+
 import { Frank } from "./cast";
 
 export default class SceneMaker {
@@ -7,25 +11,66 @@ export default class SceneMaker {
 		this.sceneMusic = sceneMusic;
 		this.textContent = textContent;
 		this.mode = mode;
-		this.upgrade = upgrade; // boolean
+		this.upgrade = upgrade;
 
 		this.gameContainer = this.puppeteer.element;
 		this.canvas = this.puppeteer.canvas;
 		this.context = this.puppeteer.context;
-		this.audio = this.puppeteer.audio;
 
 		this.textFrame = null;
-		this.upgradesPresent = false
+		this.upgradesPresent = false;
+
+		// event handlers:
+		this.startButtonClickHandler = () => {
+			this.gameContainer.removeChild(this.startButton);
+			this.puppeteer.playNextScene();
+		};
+
+		this.textFrameClickHandler = () => {
+			// If the current sentence is being gradually displayed
+			if (this.textInterval) {
+				// Clear the existing interval
+				clearInterval(this.textInterval);
+				this.textInterval = null;
+
+				// Display the full sentence immediately
+				this.dialogueText.innerHTML = this.currentSentence;
+
+				// Clear sentenceArray
+				this.sentenceArray = [];
+			} else if (this.sentences.length > 0) {
+				this.graduallyDisplaySentence();
+			} else {
+				// check if there are upgrades to be given
+				if (this.upgrade) {
+					this.createUpgradeButtons();
+				} else {
+					this.puppeteer.playNextScene();
+				}
+			}
+		};
+
+		this.attackUpgradeClickHandler = () => {
+			Frank.receiveAttackUpgrade();
+			this.puppeteer.playNextScene();
+		};
+
+		this.healthUpgradeClickHandler = () => {
+			Frank.receiveVitalityUpgrade();
+			this.puppeteer.playNextScene();
+		};
 	}
 
 	init() {
+		this.puppeteer.audio.src = this.sceneMusic;
+
 		// create scene art
 		this.sceneArtImage = new Image();
 		this.sceneArtImage.src = this.sceneArt;
 		this.drawArt(this.sceneArtImage);
 
-		// change audio
-		this.audio.src = this.sceneMusic;
+		// Initialize this.sentences here
+		this.sentences = [...this.textContent];
 
 		if (this.mode === "start") {
 			this.createStartButton();
@@ -52,120 +97,81 @@ export default class SceneMaker {
 		this.startButton.classList.add("start-button");
 		this.gameContainer.appendChild(this.startButton);
 
-		this.startButton.addEventListener("click", () => {
-			this.gameContainer.removeChild(this.startButton);
-			this.puppeteer.playNextScene();
-		});
+		this.startButton.addEventListener("click", this.startButtonClickHandler);
+	}
+
+	graduallyDisplaySentence() {
+		this.currentSentence = this.sentences.shift();
+		this.sentenceArray = this.currentSentence.split("");
+		this.textDisplay = "";
+
+		this.textSpeed = 25; // speed at which text will be displayed
+
+		this.textInterval = setInterval(() => {
+			if (this.sentenceArray.length > 0) {
+				let nextChar = this.sentenceArray.shift();
+				this.textDisplay += nextChar;
+				this.dialogueText.innerHTML = this.textDisplay;
+			} else {
+				clearInterval(this.textInterval);
+				this.textInterval = null;
+			}
+		}, this.textSpeed);
 	}
 
 	createTextFrame() {
-		// create scene textframe with html. and make it have a gray translucent background
-		// create the profile pic
-		// create the inner text
+		// create elements
 		this.textFrame = document.createElement("div");
+
 		const profilePic = document.createElement("img");
 		profilePic.src = "assets/character-art/fire_knight.png";
-		const dialogueText = document.createElement("p");
-		// add classes
+
+		this.dialogueText = document.createElement("p");
+
+		// add classes to them for styling
 		this.textFrame.classList.add("text-frame");
 		profilePic.classList.add("profile-pic");
-		dialogueText.classList.add("inner-text");
-		// append
+		this.dialogueText.classList.add("inner-text");
+
+		// append them to the game container
 		this.textFrame.appendChild(profilePic);
-		this.textFrame.appendChild(dialogueText);
+		this.textFrame.appendChild(this.dialogueText);
 		this.gameContainer.appendChild(this.textFrame);
 
-		// Split the text content into an array of sentences
-		let sentences = this.textContent;
-		let currentSentence = sentences.shift(); // Include the full stop at the end of the sentence
-		let sentenceArray = currentSentence.split("");
-		let textDisplay = "";
+		// add the first line of text in a gradual way
+		this.graduallyDisplaySentence();
 
-		// Set the speed for the text to appear
-		let textSpeed = 20; // in milliseconds
-
-		// Create an interval to display the text incrementally
-		let textInterval = setInterval(() => {
-			if (sentenceArray.length > 0) {
-				let nextChar = sentenceArray.shift();
-				textDisplay += nextChar;
-				dialogueText.innerHTML = textDisplay;
-
-				// Check if the current sentence is the last one and if upgrade buttons should be created
-				if (
-					sentenceArray.length === 0 &&
-					sentences.length === 0 &&
-					this.upgrade
-				) {
-					clearInterval(textInterval);
-					this.createUpgradeButtons();
-				}
-			} else {
-				clearInterval(textInterval);
-			}
-		}, textSpeed);
-
-		let textDone = false;
-
-		// event listener to handle clicks
-		this.textFrame.addEventListener("click", () => {
-			// If there's still text to display in the current sentence
-			if (sentences.length === 0 && this.upgrade) {
-				textDone = true;
-			} else if (sentenceArray.length > 0) {
-				// Display all remaining text in the current sentence
-				textDisplay += sentenceArray.join("");
-				dialogueText.innerHTML = textDisplay;
-				sentenceArray = []; // Empty the sentence array
-			} else if (sentences.length > 0) {
-				// If there are more sentences, start the next one
-				currentSentence = sentences.shift();
-				sentenceArray = currentSentence.split("");
-				textDisplay = "";
-				textInterval = setInterval(() => {
-					if (sentenceArray.length > 0) {
-						textDisplay += sentenceArray.shift();
-						dialogueText.innerHTML = textDisplay;
-					} else {
-						clearInterval(textInterval);
-					}
-				}, textSpeed);
-			} else {
-				// If all text has been displayed, proceed to the next scene
-				this.puppeteer.playNextScene();
-			}
-			// how do i make it so when the text is done, the upgrade buttons appear?
-			// what condition do i need to check for?
-			if (textDone && this.upgrade) {
-				this.createUpgradeButtons();
-			}
-		});
+		// add event listener to text frame and pass in the remaining text
+		this.textFrame.addEventListener("click", this.textFrameClickHandler);
 	}
 
 	createUpgradeButtons() {
+		// if there already upgrade buttons dont make new ones
+
 		// make the attack and health buff upgrade buttons
 		if (this.upgrade && !this.upgradesPresent) {
+			// Check if textFrame exists, if not create it
+			if (!this.textFrame) {
+				this.createTextFrame();
+			}
+
 			// create the elements
 			this.upgradeContainer = document.createElement("div");
 			this.attackUpgradeButton = document.createElement("button");
 			this.healthUpgradeButton = document.createElement("button");
+
 			// add classes to them for styling
 			this.upgradeContainer.className = "upgrade-container";
 			this.attackUpgradeButton.className = "attack-upgrade";
 			this.healthUpgradeButton.className = "vitality-upgrade";
+
 			// add text to each attack and health upgrade button
 			this.attackUpgradeButton.innerText = "Upgrade Attack";
 			this.healthUpgradeButton.innerText = "Upgrade Vitality";
 
 			// finally, make and hookup the attack and health functions to the character.js script
-			this.attackUpgradeButton.addEventListener("click", () => {
-				Frank.receiveAttackUpgrade();
-				this.puppeteer.playNextScene();
-			});
-			this.healthUpgradeButton.addEventListener("click", () => {
-				Frank.receiveVitalityUpgrade();
-				this.puppeteer.playNextScene();
-			});
+			this.attackUpgradeButton.addEventListener("click", this.attackUpgradeClickHandler);
+			this.healthUpgradeButton.addEventListener("click", this.healthUpgradeClickHandler);
 
 			// append these buttons to the textframe flex box
 			this.upgradeContainer.append(
@@ -178,8 +184,43 @@ export default class SceneMaker {
 	}
 
 	destroy() {
-		if (this.textFrame) {
-			this.gameContainer.removeChild(this.textFrame);
+		// If the textInterval is still running, clear it
+		if (this.textInterval) {
+			clearInterval(this.textInterval);
+			this.textInterval = null;
 		}
+
+		// Remove event listeners
+		if (this.startButton) {
+			this.startButton.removeEventListener("click", this.startButtonClickHandler);
+		}
+		if (this.textFrame) {
+			this.textFrame.removeEventListener("click", this.textFrameClickHandler);
+		}
+		if (this.attackUpgradeButton) {
+			this.attackUpgradeButton.removeEventListener("click", this.attackUpgradeClickHandler);
+		}
+		if (this.healthUpgradeButton) {
+			this.healthUpgradeButton.removeEventListener("click", this.healthUpgradeClickHandler);
+		}
+
+		// remove all game container children besides the game canvas
+		while (this.gameContainer.firstChild) {
+			if (this.gameContainer.firstChild.nodeName !== 'CANVAS') {
+				this.gameContainer.removeChild(this.gameContainer.firstChild);
+			} else if (this.gameContainer.lastChild.nodeName !== 'CANVAS') {
+				this.gameContainer.removeChild(this.gameContainer.lastChild);
+			} else {
+				break;
+			}
+		}
+
+		// Reset other properties
+		this.startButton = null;
+		this.upgradeContainer = null;
+		this.attackUpgradeButton = null;
+		this.healthUpgradeButton = null;
+		this.upgradesPresent = false;
+		this.textFrame = null;
 	}
 }

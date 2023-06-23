@@ -1,3 +1,5 @@
+// raw data for all scenes
+
 import SceneMaker from "./sceneMaker";
 
 // every scene needs: Art, Music, Text Content
@@ -20,7 +22,7 @@ export class StartScreen extends SceneMaker {
 	}
 }
 
-const cutscene1sceneArt = "assets/background-art/mountain village 2d.png";
+const cutscene1sceneArt = "assets/background-art/mountain village.png";
 const cutscene1sceneMusic = "music/xDeviruchi - Take some rest and eat some food!.wav";
 // write a story about Frank the fireknight, and his quest to defeat the dragon Robert
 const cutscene1textContent = [

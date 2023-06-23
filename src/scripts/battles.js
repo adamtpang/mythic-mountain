@@ -1,3 +1,5 @@
+// raw data for all battles
+
 import BattleMaker from "./battleMaker.js";
 import { Frank, Draymond, Hector, Robert } from "./cast.js";
 

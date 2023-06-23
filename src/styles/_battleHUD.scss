@@ -1,58 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"); /* Pixelated font */
+
+// HUD. the overall container
 .HUD {
 	width: 1147px;
 	height: 120px;
 	margin: 0 auto;
-	// make a rainbow border
 	border: 3px solid rgb(74, 152, 255);
+	border-image: linear-gradient(
+			to right,
+			purple,
+			blue,
+			green,
+			yellow,
+			orange,
+			red
+		)
+		1; /* Rainbow border */
+	// make sure the border has z index 1
 	cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
 	display: none;
 	flex-direction: row;
 	justify-content: space-around;
 	position: relative;
+	background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7); /* Shadow for 3D effect */
 }
 
-.mini-menu {
-	width: 25%;
-	height: 120px;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	position: relative;
-}
-
-#fight-button {
-	font-size: 35px;
-	width: 287px;
-	color: black;
-	border: 10px solid gold;
-	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-	background-color: rgb(255, 255, 255);
-}
-
-.fight-choice {
-	width: 50%;
-	font-size: 20px;
-	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-	display: none;
-	color: rgb(9, 9, 9);
-}
-
-.fight-choice button {
-	width: 144px;
-	height: 60px;
-	border: none;
-	color: rgb(255, 255, 255);
-}
+// team hud details
 
 .player-name,
 .enemy-name {
 	font-size: 30px;
-	font-family: sans-serif;
+	font-family: "Press Start 2P", cursive; /* Pixelated font */
 	font-weight: bold;
 	position: absolute;
-	top: 10px;
-	color: black;
+	top: 20px;
+	color: white;
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7); /* Text shadow for depth */
 	z-index: 1;
 }
 
@@ -64,26 +48,6 @@
 	right: 10px;
 }
 
-.dialogue {
-	color: white;
-	font-size: 20px;
-	font-family: sans-serif;
-	font-weight: bold;
-	position: relative;
-	z-index: 1;
-}
-
-#dialogue-text {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	z-index: 1;
-}
-
-#dialogue-img {
-	z-index: -1;
-}
-
 .player-hp-border,
 .enemy-hp-border {
 	background-color: black;
@@ -93,6 +57,7 @@
 	top: 10px;
 	z-index: 1;
 	border: 4px solid black;
+	border-radius: 10px;
 }
 
 .player-hp-border {
@@ -112,6 +77,7 @@
 	top: 10px;
 	z-index: 1;
 	border: 4px solid black;
+	border-radius: 10px;
 }
 
 .player-hp {
@@ -122,20 +88,109 @@
 	right: 10px;
 }
 
-.player-hp-num {
+.player-hp-num,
+.enemy-hp-num {
 	position: absolute;
-	top: 40px;
-	left: 10px;
+	top: 70px;
 	z-index: 1;
-	font-size: 37px;
-	font-family: sans-serif;
+	font-size: 20px;
+	font-family: "Press Start 2P", cursive; /* Pixelated font */
+	font-weight: bold;
+	color: white;
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7); /* Text shadow for depth */
+}
+
+.player-hp-num {
+	left: 10px;
 }
 
 .enemy-hp-num {
-	position: absolute;
-	top: 40px;
 	right: 10px;
+}
+
+// dialogue box 2
+
+.dialogue {
+	color: white;
+	font-size: 20px;
+	font-family: "Press Start 2P", cursive; /* Pixelated font */
+	font-weight: bold;
+	position: relative;
 	z-index: 1;
-	font-size: 37px;
-	font-family: sans-serif;
+}
+
+#dialogue-text {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 1;
+}
+
+#dialogue-img {
+	z-index: -1;
+}
+
+// mini menu and fight details
+
+.mini-menu {
+	width: 25%;
+	height: 120px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	position: relative;
+}
+
+#fight-button {
+	font-size: 35px;
+	width: 287px;
+	color: black;
+	border: 10px double gold; /* Double border */
+	font-family: "Press Start 2P", cursive; /* Pixelated font */
+	background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+	cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
+	transition: all 0.3s ease; /* Transition for hover effect */
+	z-index: 1;
+}
+
+#fight-button:hover {
+	background-color: gold; /* Button turns gold on hover */
+	color: black;
+	transform: scale(1.05); /* Slightly enlarge the button */
+
+}
+
+.fight-choice {
+	width: 50%;
+	font-size: 16px; /* Lower font size */
+	font-family: "Press Start 2P", cursive; /* Pixelated font */
+	display: none;
+	color: rgb(9, 9, 9);
+	border: 10px double gold; /* Double border */
+	cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
+	transition: all 0.3s ease; /* Transition for hover effect */
+}
+
+.fight-choice:hover {
+	background-color: gold; /* Button turns gold on hover */
+	color: black;
+}
+
+.fight-choice button {
+	width: 144px;
+	height: 60px;
+	border: none;
+	color: rgb(255, 255, 255);
+}
+
+.tooltip {
+	width: 300px;
+	height: 50px;
+	position: absolute;
+	top: 110%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	display: none;
+	color: white;
 }

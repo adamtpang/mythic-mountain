@@ -1,4 +1,9 @@
+// raw data for cast of characters in the game
+
 import Character from "./character.js";
+
+const isTestingMode = false; // or false, depending on whether you want testing mode enabled or not
+const isHellMode = false; // or false, depending on whether you want hell mode enabled or not
 
 // URLs
 const fireknightURL = "assets/character-art/fireknight_idle.png";
@@ -19,14 +24,22 @@ beholderSpriteSheet.src = beholderURL;
 dragonSpriteSheet.src = dragonURL;
 
 // enable cheats:
-// setting enemey stat multipliers
-const slimeMultiplier = .75;
-const beholderMultiplier = 1;
-const dragonMultiplier = 2.5;
+// setting enemey stat multipliers .75, 1, 2.5
+let slimeMultiplier = 0.75;
+let beholderMultiplier = 1;
+let dragonMultiplier = 2.5;
 
-// const slimeMultiplier = .1;
-// const beholderMultiplier = .1;
-// const dragonMultiplier = .1;
+if (isTestingMode) {
+	slimeMultiplier = 0.01;
+	beholderMultiplier = 0.01;
+	dragonMultiplier = 0.01;
+}
+
+if (isHellMode) {
+	slimeMultiplier = 50;
+	beholderMultiplier = 50;
+	dragonMultiplier = 50;
+}
 
 // names
 const frankName = "Frank";
@@ -35,7 +48,7 @@ const hectorName = "Hector";
 const robertName = "Robert";
 
 // base stats
-const health = 40;
+const health = isTestingMode ? 1000 : 40; // if in testing mode, set health to a high value
 const firstAttack = Math.ceil(health * 0.1);
 const secondAttack = Math.ceil(firstAttack * 1.5);
 const thirdAttack = Math.ceil(firstAttack * 2);
@@ -55,10 +68,10 @@ const robertTeam = "enemy";
 
 // moves
 const frankMoves = [
-	{ "Paper Cut": [firstAttack, 100] },
-	{ "Classic Slash": [secondAttack, 80] },
-	{ "Fire Slash": [thirdAttack, 60] },
-	{ "Drink Potion": [heal, 100] },
+	{ "Paper Cut": [isTestingMode ? 1000 : firstAttack, 100] },
+	{ "Classic Slash": [isTestingMode ? 1500 : secondAttack, 80] },
+	{ "Fire Slash": [isTestingMode ? 2000 : thirdAttack, 60] },
+	{ "Drink Potion": [isTestingMode ? 1500 : heal, 100] },
 ];
 const draymondMoves = [
 	{ Tackle: [firstAttack * slimeMultiplier, 100] },

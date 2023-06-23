@@ -20,14 +20,6 @@ body {
 	position: relative;
 }
 
-// .game-container img {
-// 	border-radius: 15px;
-// 	left: 42%;
-// 	top: 80%;
-// 	position: absolute;
-// 	background-clip: padding-box;
-// }
-
 .game-container .game-canvas {
 	position: absolute;
 }
@@ -117,6 +109,7 @@ body {
 }
 
 // cutscene CSS:
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"); /* Pixelated font */
 
 .text-frame {
 	background-color: rgba(0, 0, 0, 0.8);
@@ -128,9 +121,9 @@ body {
 	width: 100%;
 	height: 20%;
 	text-align: center;
-	font-size: 30px;
+	font-size: 20px;
 	color: rgb(255, 255, 255);
-	font-family: sans-serif;
+	font-family: "Press Start 2P", cursive;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -161,8 +154,9 @@ body {
 .vitality-upgrade {
 	width: 90%;
 	height: 30%;
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-family: "Press Start 2P", cursive;
 	font-size: 20px;
+	cursor: url("../assets/puppeteer-art/cursor1.png"), auto;
 }
 
 // text box animation
