@@ -53,6 +53,7 @@ export default class Puppeteer {
 			const icon = button.querySelector("i");
 			if (this.audio.muted) {
 				this.playMusic();
+
 				icon.classList.remove("fa-volume-up");
 				icon.classList.add("fa-volume-mute");
 			} else {
@@ -67,8 +68,9 @@ export default class Puppeteer {
 
 	playMusic() {
 		const puppeteerPlay = this.audio.play();
+		console.log(puppeteerPlay)
 		if (puppeteerPlay !== undefined) {
-			puppeteerPlay.then(() => {}).catch((error) => {});
+			puppeteerPlay.then(() => { }).catch((error) => { });
 		}
 	}
 
@@ -82,9 +84,6 @@ export default class Puppeteer {
 
 		// start the new screen
 		this.currentScreen.init();
-
-		// play music
-		this.playMusic();
 	}
 
 	// handles logic of what screen to change to depending on the state of the game
