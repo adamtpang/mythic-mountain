@@ -51,13 +51,15 @@ export default class Puppeteer {
 		button.addEventListener("click", () => {
 			const icon = button.querySelector("i");
 
-			// toggle audio mute
+			// // toggle audio mute
 			this.audio.muted = !this.audio.muted;
 
 			if (this.audio.muted) {
+				this.audio.pause()
 				icon.classList.remove("fa-volume-up");
 				icon.classList.add("fa-volume-mute");
 			} else {
+				this.audio.play()
 				icon.classList.remove("fa-volume-mute");
 				icon.classList.add("fa-volume-up");
 				icon.style.animation = "none"; // Remove flashing effect from the icon
