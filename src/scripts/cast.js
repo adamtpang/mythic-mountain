@@ -25,8 +25,8 @@ dragonSpriteSheet.src = dragonURL;
 
 // enable cheats:
 // setting enemey stat multipliers .75, 1, 2.5
-let slimeMultiplier = 0.8;
-let beholderMultiplier = 1.6;
+let slimeMultiplier = 0.6;
+let beholderMultiplier = 1.4;
 let dragonMultiplier = 2.5;
 
 if (isTestingMode) {
