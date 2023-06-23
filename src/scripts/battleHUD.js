@@ -173,7 +173,6 @@ export default class BattleHUD {
 		}
 	}
 
-
 	// rectangle 2
 	createDialogueBox() {
 		const dialogueBox = this.createElement("div", {
@@ -220,7 +219,6 @@ export default class BattleHUD {
 				innerText: "",
 			});
 
-
 			choice.appendChild(tooltip);
 
 			moveMenu.appendChild(choice);
@@ -232,7 +230,6 @@ export default class BattleHUD {
 				tooltip.style.display = "none";
 				this.battle.playerChoose(choice);
 			});
-
 
 			// Add a hover effect for each choice that shows a tooltip with the move's damage and accuracy
 			choice.addEventListener("mouseover", () => {
@@ -247,9 +244,9 @@ export default class BattleHUD {
 				if (move) {
 					let moveInfo;
 					if (move.isHeal) {
-						moveInfo = `Healing: ${move.value}\n Accuracy: ${move.accuracy}`;
+						moveInfo = `Healing: ${move.value} Accuracy: ${move.accuracy}`;
 					} else {
-						moveInfo = `Damage: ${move.value}\nAccuracy: ${move.accuracy}`;
+						moveInfo = `Damage: ${move.value} Accuracy: ${move.accuracy}`;
 					}
 
 					// Set the tooltip innerText with the move info

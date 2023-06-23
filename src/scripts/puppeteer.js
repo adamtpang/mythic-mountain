@@ -52,20 +52,16 @@ export default class Puppeteer {
 		};
 	}
 
-	makeMuted() {
-		console.log("puppeteer make muted")
-		
+	makeMuted() {		
 		// setting up the mute button and making it clickable
 		const button = document.getElementById("mute-button");
 		const icon = button.querySelector("i");
-		
+
 		icon.classList.remove("fa-volume-up");
 		icon.classList.add("fa-volume-mute");
 	}
 
 	makeUnmuted() {
-		console.log("puppeteer make unmuted")
-
 		// setting up the mute button and making it clickable
 		const button = document.getElementById("mute-button");
 		const icon = button.querySelector("i");
@@ -77,8 +73,6 @@ export default class Puppeteer {
 	}
 
 	init() {
-		console.log("puppeteer init")
-
 		this.resetGame();
 		const button = document.getElementById("mute-button");
 		const icon = button.querySelector("i");
@@ -87,15 +81,9 @@ export default class Puppeteer {
 	}
 
 	createAudio() {
-		console.log("puppeteer create audio")
-
 		if (this.buttonClicked) {
-			console.log("puppeteer create audio button clicked")
-
 			// check if audio already exists
 			if (!this.audio) {
-				console.log("puppeteer create audio no audio")
-
 				this.audio = new Audio();
 				this.audio.muted = true;
 				this.audio.loop = true;
@@ -104,8 +92,6 @@ export default class Puppeteer {
 				this.audio.src = this.currentScreen.sceneMusic;
 				this.audio.play();
 			} else {
-				console.log("puppeteer create audio audio exists")
-
 				// Stop any audio that is currently playing
 				this.audio.pause();
 				this.audio.currentTime = 0;
