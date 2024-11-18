@@ -1,5 +1,5 @@
 {
-  "name": "mythic-mountain",
+  "name": "mythicmountain",
   "version": "1.0.0",
   "description": "Tiny medieval-themed, turned-based combat browser RPG",
   "main": "index.js",
@@ -12,15 +12,15 @@
 
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adamtpang/mythic-mountain.git"
+    "url": "git+https://github.com/adamtpang/mythicmountain.git"
   },
   "keywords": [],
   "author": "Adam Pang",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/adamtpang/mythic-mountain/issues"
+    "url": "https://github.com/adamtpang/mythicmountain/issues"
   },
-  "homepage": "https://github.com/adamtpang/mythic-mountain#readme",
+  "homepage": "https://github.com/adamtpang/mythicmountain#readme",
   "dependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",

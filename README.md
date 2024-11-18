@@ -2,7 +2,7 @@
 
 ## Live Link
 
-[Mythic Mountain](https://adamtpang.github.io/mythic-mountain/)
+[Mythic Mountain](https://adamtpang.github.io/mythicmountain/)
 
 ## Background
 
