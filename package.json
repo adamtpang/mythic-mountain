@@ -12,15 +12,15 @@
 
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bubbapang/mythic-mountain.git"
+    "url": "git+https://github.com/adamtpang/mythic-mountain.git"
   },
   "keywords": [],
-  "author": "Adam Pangelinan",
+  "author": "Adam Pang",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bubbapang/mythic-mountain/issues"
+    "url": "https://github.com/adamtpang/mythic-mountain/issues"
   },
-  "homepage": "https://github.com/bubbapang/mythic-mountain#readme",
+  "homepage": "https://github.com/adamtpang/mythic-mountain#readme",
   "dependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
